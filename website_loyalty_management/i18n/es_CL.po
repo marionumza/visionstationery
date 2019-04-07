@@ -1,0 +1,1198 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* website_loyalty_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-05 18:02+0000\n"
+"PO-Revision-Date: 2017-07-05 18:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_loyalty_id
+msgid " Loyalty Program"
+msgstr " Programa de fidelidad"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_website_loyalty_management_name
+msgid " The mention name will represented as the loyalty product name in the cart !"
+msgstr " El nombre mención será representado como el nombre del producto lealtad en el carro !"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_website_loyalty_management_loyalty_product_description
+msgid " These Text will be visible to user in there cart with awarded amount of loyalty benefits"
+msgstr " Estos texto será visible para el usuario en ese carro con importe concedido los beneficios de fidelidad"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_sale_order_count
+msgid "# of Sales Order"
+msgstr "Nº de pedido de venta"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "% benefits on this redemption of"
+msgstr "% beneficios en este rescate de"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid ") for redeeming the loyalty points ."
+msgstr ") para redimir los puntos de fidelidad ."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid ") is less than the minimum purchase amount ("
+msgstr ") es menor que la cantidad mínima de compra ("
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:38
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:36
+#: model:ir.model.fields,help:website_loyalty_management.field_website_loyalty_history_redeem_policy
+#: model:ir.model.fields,help:website_loyalty_management.field_website_loyalty_management_redeem_policy
+#, python-format
+msgid "* The The One time redeem policy  is set when user have only one\n"
+"    time redeem options,after the redemption reward points will reduced to zero!\n"
+"\n"
+"    * The Partial Redeem  policy  allow user the redeem\n"
+"    some specific amount of money multiple time with the appropriate point reduction. "
+msgstr  "* La política de redimir Una vez se establece cuando el usuario tiene sólo una \ n"
+"Las opciones de canje de tiempo, después de los puntos de recompensa redención se reducirá a cero! \ N"
+"\norte"
+"* La política de Canjear Partial permite al usuario redimir \ n"
+"Una cantidad específica de dinero de tiempo múltiple con la reducción de punto adecuado."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.reward_redem_rule_form_view
+msgid ":1 reward points ="
+msgstr ":1 Puntos de recompensa ="
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "<b>**NOTES:</b>The value of points depends on three things:"
+msgstr "<b> ** NOTAS: </ b> El valor de los puntos depende de tres cosas:"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "<b>Congratulations !</b>\n"
+"              <br/>You are redeeming 100%  of your reward points worth"
+msgstr "<b>¡Felicidades! </ B> \ n "
+"<br/> Usted está redimiendo el 100% de sus puntos de recompensa vale la pena"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "<b>Remain Points 0 </b>"
+msgstr "<b>Punto del Remain 0 </b>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "<b>The final redemption reward amount will be subject to the above mention constraints.</b>"
+msgstr "<b>La cantidad final recompensa redención estará sujeta a las limitaciones se mencionan por encima.</b>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "<span class=\"_o_custom_text_color\">Loyalty Rules!</span>"
+msgstr "<span class=\"_o_custom_text_color\">Reglas de fidelidad!</span>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "<span class=\"_o_custom_text_color\">Redemption Policy </span>"
+msgstr "<span class=\"_o_custom_text_color\">política de reembolso </span>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<span style=\"color:green\">Points </span>\n"
+"                                    <span class=\"oe_inline\">For a Purchase of every  </span>"
+msgstr "<span style=\"color:green\">Puntos </span>\n"
+"                                    <span class=\"oe_inline\">Para una compra de cada  </span>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<strong>Benefits Awarded</strong>: is Order Stage at which the gain loyalty points will transferred to customer accounts."
+msgstr "<strong> Las prestaciones reconocidas </ strong> es la Orden de la etapa a la que se transfirieron los puntos de fidelidad a la ganancia de las cuentas de clientes."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.confirmation
+msgid "<strong>Loyalty information:</strong>"
+msgstr "<strong>Información de la lealtad:</strong>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<strong>Maximum Redeem amount per Sale Order </strong>is the  Maximum amount of money that a user can Redeem at Once ."
+msgstr "<Strong> Cantidad máxima de canje por orden de venta </ ​​strong> es la cantidad máxima de dinero que un usuario puede canjear a la vez. "
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<strong>Minimum Purchase</strong>:is Sale Order amount criteria which the customer have to satisfied to gain the loyalty points."
+msgstr "<Strong> Compra mínima </ strong>: es el criterio de cantidad de la orden de venta que el cliente debe satisfacer para obtener los puntos de fidelidad. "
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<strong>Redeem Policy </strong>is defined the how redeem points deduction."
+msgstr "Redimir Política </ strong> se define el cómo canjear la deducción de puntos. "
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "<strong>Sign Up Points</strong>:is the awarded points to customer  on singnup."
+msgstr "<strong>Puntos de registro </ strong>: los puntos premiados para el cliente en singnup."
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:132
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:130
+#: sql_constraint:website.loyalty.management:0
+#, python-format
+msgid "A Loyalty Program with the same name already exists!"
+msgstr "Un programa de fidelización con el mismo nombre ya existe!"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_property_account_payable_id
+msgid "Account Payable"
+msgstr "Cuenta a pagar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_property_account_receivable_id
+msgid "Account Receivable"
+msgstr "Cuenta a cobrar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_active
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_active
+msgid "Active"
+msgstr "Activo"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "After redemption your point balance will be zero ."
+msgstr "Después de la redención de su saldo de puntos será igual a cero."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Applies only to orders  amount of"
+msgstr "Sólo se aplica a las órdenes cantidad de"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "As Per\n"
+"              <b>one time redemption policy </b>\n"
+"              you will enjoy only"
+msgstr "Como por <b> política de reembolso una vez </ b> sólo se va a disfrutar"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "As per\n"
+"            <b>partial redemption policy   </b>"
+msgstr "De acuerdo con <b> política de reembolso parcial   </b>"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_bank_account_count
+msgid "Bank"
+msgstr "Banco"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_loyalty_redeem_stage
+msgid "Benefits Awarded "
+msgstr "Las prestaciones reconocidas "
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+#: selection:sale.order,wk_loyalty_state:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_ref_company_ids
+msgid "Companies that refers to partner"
+msgstr "Compañías que se refieren a la empresa"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_contract_ids
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_contracts_count
+msgid "Contracts"
+msgstr "Contratos"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_payment_token_count
+msgid "Count Payment Token"
+msgstr "Count Payment Token"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_create_uid
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_create_uid
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_create_date
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_create_date
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_partner_id
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Plazo de pago de cliente"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Customer will awarded"
+msgstr "será otorgado al cliente"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_trust
+msgid "Degree of trust you have in this debtor"
+msgstr "Grado de confianza para este deudor"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_redeem_amount
+msgid "Discount Offered"
+msgstr "descuento ofrecido"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_display_name
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_display_name
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "Don't Have An Account Yet?"
+msgstr "¿No tiene una cuenta todavía?"
+
+#. module: website_loyalty_management
+#: selection:sale.order,wk_loyalty_state:0
+msgid "Done"
+msgstr "Hecho"
+
+#. module: website_loyalty_management
+#: selection:sale.order,wk_loyalty_state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_end_date
+msgid "End Date"
+msgstr "Fecha final"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_sale_order_wk_extra_loyalty_points
+msgid "Extra Loyalty Points"
+msgstr "Adicionales puntos de lealtad"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_property_account_position_id
+msgid "Fiscal Position"
+msgstr "Posición fiscal"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "For every"
+msgstr "Para cada"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.id_loyalty_history_search
+msgid "Group BY"
+msgstr "Group BY"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_has_unreconciled_entries
+msgid "Has unreconciled entries"
+msgstr "Contiene entradas irreconciliadas"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "I want to Redeem Now !"
+msgstr "Quiero Canjear ahora !"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "I will Redeem it Later !"
+msgstr "Yo redimiré tarde!"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_id
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_id
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_image
+msgid "Image"
+msgstr "Imagen"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_invoice_warn
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_invoice_ids
+msgid "Invoices"
+msgstr "Facturas"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_issued_total
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_journal_item_count
+msgid "Journal Items"
+msgstr "Apuntes contables"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule___last_update
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history___last_update
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_last_website_so_id
+msgid "Last Online Sale Order"
+msgstr "Última Orden de Venta en Línea"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_write_uid
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_write_uid
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_write_date
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_write_date
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_last_time_entries_checked
+msgid "Last time the invoices & payments matching was performed for this partner. It is set either if there's not at least an unreconciled debit and an unreconciled credit or if you click the \"Done\" button."
+msgstr "Última vez que se conciliaros facturas y pagos de este asociado. Se configura incluso si no hay ningún débito o crédito por conciliar, o si pulsa el botón \"Hecho\"."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Later"
+msgstr "Later"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Later Total Purchase"
+msgstr "Compra total posterior"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Later Total Purchase\n"
+"                                <br/>"
+msgstr "Compra total posterior\n"
+"                                <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_last_time_entries_checked
+msgid "Latest Invoices & Payments Matching Date"
+msgstr "Fecha de la última conciliación de facturas y pagos"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_loyalty_base
+msgid "Loyalty Awarded On Basis Of"
+msgstr "La lealtad concede sobre la base de"
+
+#. module: website_loyalty_management
+#: model:product.product,name:website_loyalty_management.product_loyalty_management
+#: model:product.template,name:website_loyalty_management.product_loyalty_management_product_template
+msgid "Loyalty Benefit"
+msgstr "Beneficio de lealtad"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Loyalty Benefits"
+msgstr "Beneficio de lealtad"
+
+#. module: website_loyalty_management
+#: model:ir.ui.menu,name:website_loyalty_management.menu_WkLoyaltyBenefitsHistory_menu
+msgid "Loyalty Benefits History"
+msgstr "La lealtad historia de las prestaciones"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "Loyalty Benefits!"
+msgstr "Los beneficios de fidelidad!"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_res_partner_form_view
+msgid "Loyalty History"
+msgstr "Historia de fidelización"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.id_loyalty_history_search
+msgid "Loyalty History Search list"
+msgstr "La lealtad Historia Lista de busqueda"
+
+#. module: website_loyalty_management
+#: model:ir.ui.menu,name:website_loyalty_management.menu_website_loyalty_management_root
+msgid "Loyalty Management"
+msgstr "Gestión de la lealtad"
+
+#. module: website_loyalty_management
+#: model:ir.actions.act_window,name:website_loyalty_management.action_website_loyalty_management
+msgid "Loyalty Management "
+msgstr "Gestión de la lealtad "
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_sale_order_wk_website_loyalty_points
+msgid "Loyalty Points"
+msgstr "Loyalty Points"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_redeem_policy
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_redeem_policy
+msgid "Loyalty Policy"
+msgstr "Loyalty Policy"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_product_id
+#: model:product.category,name:website_loyalty_management.wk_product_category_loyalty_management
+msgid "Loyalty Product"
+msgstr "Loyalty Product"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_loyalty_product_description
+msgid "Loyalty Product Description"
+msgstr "Loyalty Product Description"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Loyalty Program Information"
+msgstr "Información sobre el programa de fidelización"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.wk_loyaltyredeemhistory_form_view
+msgid "Loyalty Redeem History"
+msgstr "La lealtad Canjear Historia"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_website_loyalty_history
+msgid "Loyalty Redeem History Class"
+msgstr "La lealtad Canjear clase de historia"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Loyalty Redemption Rule !"
+msgstr "Regla redención de fidelización !"
+
+#. module: website_loyalty_management
+#: model:ir.ui.menu,name:website_loyalty_management.menu_website_loyalty_management_submenu
+msgid "Loyalty Rules"
+msgstr "Reglas de fidelidad"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_sale_order_wk_loyalty_state
+msgid "Loyalty Stage"
+msgstr "Etapa de fidelización"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_loyalty_fk
+msgid "Loyalty fk"
+msgstr "FK lealtad"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Loyalty points are awarded at"
+msgstr "puntos de fidelidad se otorgan a"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Max Redeem amount\n"
+"\n"
+"                                  <br/>"
+msgstr "Cantidad máxima canjear\n"
+"\n"
+"                                  <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Max Redeem amount\n"
+"\n"
+"                                <br/>"
+msgstr "Cantidad máxima canjear\n"
+"\n"
+"                                <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Max Redeem amount\n"
+"                                  <br/>"
+msgstr "Cantidad máxima canjear\n"
+"                                  <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Max Redeem amount\n"
+"                                <br/>"
+msgstr "Cantidad máxima canjear\n"
+"                                <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_max_redeem_amount
+msgid "Maximum Redeem Amount Per Sale Order"
+msgstr "Canjear importe máximo por orden de venta"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Maximum redeemable  Amounts"
+msgstr "Maximum redeemable  Amounts"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_invoice_warn_msg
+msgid "Message for Invoice"
+msgstr "Mensaje para factura"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_sale_warn_msg
+msgid "Message for Sales Order"
+msgstr "Mensaje para el pedido de venta"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_min_purchase
+msgid "Minimum  Purchase"
+msgstr "Compra mínima"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "NOTES"
+msgstr "NOTAS"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Now"
+msgstr "Now"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Ahora compra total\n"
+"                                <br/>"
+msgstr "Ahora compra total\n"
+"                                <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "OK"
+msgstr "Aceptar"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "OR"
+msgstr "OR"
+
+#. module: website_loyalty_management
+#: selection:website.loyalty.management,loyalty_redeem_stage:0
+msgid "On Order Completion"
+msgstr "En pedido Finalización"
+
+#. module: website_loyalty_management
+#: selection:website.loyalty.management,loyalty_redeem_stage:0
+msgid "On Order Confirmation"
+msgstr "En confirmación de pedido"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "One Time Redeem"
+msgstr "One Time Redeem"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+#: selection:website.loyalty.management,redeem_policy:0
+msgid "One Time Redemption"
+msgstr "Un Tiempo Canjear"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "One time Redemption Rule"
+msgstr "Regla redención una vez"
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:167
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:165
+#, python-format
+msgid "Only one Loyalty Program can be active at once !"
+msgstr "¡Solo un Programa de Lealtad puede estar activo al mismo tiempo!"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Partial Redeem"
+msgstr "Partial Redeem"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Partial Redeem Examples"
+msgstr "Ejemplos parcial Canjear"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+#: selection:website.loyalty.management,redeem_policy:0
+msgid "Partial Redemption"
+msgstr "La redención parcial"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_debit_limit
+msgid "Payable Limit"
+msgstr "Límite a pagar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_payment_token_ids
+msgid "Payment Tokens"
+msgstr "Payment Tokens"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Point Calculation"
+msgstr "Point Calculation"
+
+#. module: website_loyalty_management
+#: selection:website.loyalty.history,loyalty_process:0
+msgid "Point Deducted"
+msgstr "Cálculo del punto"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_point_end
+msgid "Point End"
+msgstr "End Point"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_point_start
+msgid "Point Start"
+msgstr "punto de inicio"
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:308
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:303
+#, python-format
+msgid "Point Start and Point End must be different."
+msgstr "El punto de inicio y punto final debe ser diferente."
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:310
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:305
+#, python-format
+msgid "Point Start must be smaller  than  Point End."
+msgstr "Point Start debe ser menor que Point End."
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:305
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:300
+#, python-format
+msgid "Point Start should be positive."
+msgstr "El inicio del punto debe ser positivo."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Points"
+msgstr "Puntos"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_points_processed
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_points
+msgid "Points"
+msgstr "Puntos"
+
+#. module: website_loyalty_management
+#: selection:website.loyalty.history,loyalty_process:0
+msgid "Points Added"
+msgstr "puntos Añadido"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_loyalty_process
+#: model:ir.ui.view,arch_db:website_loyalty_management.id_loyalty_history_search
+msgid "Process"
+msgstr "Proceso"
+
+#. module: website_loyalty_management
+#: selection:website.loyalty.management,loyalty_base:0
+msgid "Product Category"
+msgstr "categoria de producto"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_purchase
+#: selection:website.loyalty.management,loyalty_base:0
+msgid "Purchase Amount"
+msgstr "Monto de la compra"
+
+#. module: website_loyalty_management
+#: model:ir.actions.act_window,name:website_loyalty_management.act_res_partner_redeem_history_open
+#: model:ir.actions.act_window,name:website_loyalty_management.act_website_loyalty_management_history_open
+#: model:ir.actions.act_window,name:website_loyalty_management.action_WkLoyaltyRedeemHistory
+msgid "Redeem History"
+msgstr "canjear Historia"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Redeem Now"
+msgstr "canjear ahora"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Redeem Reward"
+msgstr "redimir Recompensa"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_redeem_rule_list
+msgid "Redeem Rule"
+msgstr "redimir a la Regla"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Redeem it Later"
+msgstr "Más tarde redimirla"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_date
+msgid "Redeemed Date"
+msgstr "redimidos Fecha"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Redemption Calculation"
+msgstr "Cálculo redención"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Redemption Evaluation"
+msgstr "Evaluación de la redención"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "Redemption Rules"
+msgstr "Reglas de Amortización"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_process_reference
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Remain Points\n"
+"\n"
+"                                  <br/>"
+msgstr "
+Quedan puntos.\n"
+"\n"
+"                                  <br/>"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_reward_redeem_rule
+msgid "Reward Redeem Rule Class"
+msgstr "Canjear recompensa el dominio de clase"
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:296
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:291
+#, python-format
+msgid "Reward amount should be positive."
+msgstr "La cantidad de la recompensa debe ser positiva."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_reward
+msgid "Reward of 1 point"
+msgstr "Reward of 1 point"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_reward_redeem_rule_name
+msgid "Rule Name"
+msgstr "Nombre de regla"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.reward_redem_rule_form_view
+msgid "Rule:Points Between"
+msgstr "Rule:Points Between"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.id_loyalty_history_search
+msgid "Sale Order"
+msgstr "Sale Order"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_history_sale_order_ref
+msgid "Sale Order No."
+msgstr "Sale Order No."
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_sale_order
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_sale_order_ids
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_sale_warn
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_invoice_warn
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_sale_warn
+msgid "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field."
+msgstr "Si selecciona la opción \"Aviso\" se notificará a los usuarios con el mensaje, si selecciona \"Mensaje de bloqueo\" se lanzará una excepción con el mensaje y se bloqueará el flujo. El mensaje debe escribirse en el siguiente campo."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "Sign UP"
+msgstr "Regístrate"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_signup_points
+msgid "Sign Up Points"
+msgstr "Inscribir Puntos"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Sorry ,Currently no  redeem policy  is available, Please try later ."
+msgstr "Lo sentimos, actualmente no hay redimir política está disponible, por favor intente más tarde ."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Sorry ,Currently no  reward policy  is available, Please try later."
+msgstr "Lo sentimos, actualmente no hay ninguna política de recompensa disponible. Inténtelo más tarde."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Sorry ,Loyalty  feature is not available right now , Please try later."
+msgstr "Lo sentimos, la función de Lealtad no está disponible ahora, por favor intente más tarde."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Sorry ,You have 0 Points you can't redeem right now !"
+msgstr "Lo sentimos, tienes 0 puntos que no puedes canjear ahora mismo!"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_website_loyalty_management_start_date
+msgid "Start Date"
+msgstr "Fecha inicial"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "Thanks for showing interest in our Loyalty Program."
+msgstr "Gracias por mostrar interés en nuestro programa de fidelización."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_partner_wk_website_loyalty_points
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_wk_website_loyalty_points
+msgid "The loyalty points are the points with which the user is awarded of being Loyal !"
+msgstr "Los puntos de fidelidad son los puntos con los que el usuario se otorga de ser leal!"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The maximum redemption limit."
+msgstr "El límite máximo de la redención."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The number of points in your account."
+msgstr "El número de puntos en su cuenta.."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The one time redemption policy allows you to redeem all your previously gained loyalty points at once."
+msgstr "La política de reembolso una vez le permite canjear todos los puntos de fidelidad previamente adquiridos a la vez."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The partial redemption policy allows you to redeem your points multiple times with the appropriate deduction of points  *."
+msgstr "La política de amortización parcial le permite canjear sus puntos múltiples veces con la deducción de puntos adecuado *."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_has_unreconciled_entries
+msgid "The partner has at least one unreconciled debit and credit since last time the invoices & payments matching was performed."
+msgstr "El asociado tiene al menos un débito o crédito no conciliado desde la última vez que se realizó la conciliación de facturas y pagos."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_partner_wk_website_loyalty_points
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_wk_website_loyalty_points
+msgid "The points are the points with which the user is awarded of being Loyal !"
+msgstr "Los puntos son los puntos con los que el usuario es galardonado de ser Leal!"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The remaining points will be preserved in your account."
+msgstr "Los puntos restantes se conservan en su cuenta."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "The total amount of the sale order."
+msgstr "La cantidad total de la orden de venta.."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "The user will have to lost all it's points for a single redemption."
+msgstr "El usuario tendrá que todas las perdidas Es puntos para una única redención."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "The user will will lost only the appropriated number of points for a redemption."
+msgstr "El usuario será perdido sólo el número apropiado de puntos para una redención."
+
+#. module: website_loyalty_management
+#: code:addons/website_loyalty_management/models/website_loyalty_management (copy).py:322
+#: code:addons/website_loyalty_management/models/website_loyalty_management.py:317
+#, python-format
+msgid "This Redeem Points range is already assign to another redeem Rule !"
+msgstr " Este rango de Canjear Puntos ya está asignado a otra Regla de canje!"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_property_account_payable_id
+msgid "This account will be used instead of the default one as the payable account for the current partner"
+msgstr "Esta cuenta se utilizará en lugar de la cuenta por defecto como la cuenta pendiente de pago del asociado actual."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_property_account_receivable_id
+msgid "This account will be used instead of the default one as the receivable account for the current partner"
+msgstr "Esta cuenta se utilizará en lugar de la cuenta por defecto como la cuenta pendiente de cobro del asociado actual."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_website_loyalty_management_image
+msgid "This field holds the image used as image for the product, limited to 1024x1024px."
+msgstr "Este campo contiene la imagen usada para el producto, limitada a 1024x1024 px."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_property_supplier_payment_term_id
+msgid "This payment term will be used instead of the default one for purchase orders and vendor bills"
+msgstr "Se utilizará esta condición de pago, en lugar de la predeterminada, para los pedidos de compra y las facturas de proveedor."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_property_payment_term_id
+msgid "This payment term will be used instead of the default one for sale orders and customer invoices"
+msgstr "Se utilizará esta condición de pago, en lugar de la predeterminada, para los pedidos de venta y facturas de clientes"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "To access this feature you will have to"
+msgstr "Para acceder a esta función, tendrá que"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_total_invoiced
+msgid "Total Invoiced"
+msgstr "Total facturado"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_debit
+msgid "Total Payable"
+msgstr "Total a pagar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_credit
+msgid "Total Receivable"
+msgstr "Total a cobrar"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_credit
+msgid "Total amount this customer owes you."
+msgstr "Importe total que le debe el cliente."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_debit
+msgid "Total amount you have to pay to this vendor."
+msgstr "Importe total a pagar a este proveedor."
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_res_users
+msgid "Users"
+msgstr "Usuarios"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,help:website_loyalty_management.field_res_users_currency_id
+msgid "Utility field to express amount currency"
+msgstr "Campo útil para expresar importe en divisa."
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr "Términos de Pago"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_website
+msgid "Website"
+msgstr "Sitio Web"
+
+#. module: website_loyalty_management
+#: model:ir.model,name:website_loyalty_management.model_website_loyalty_management
+msgid "Website Loyalty Management"
+msgstr "Gestión de fidelización página web"
+
+#. module: website_loyalty_management
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_partner_wk_website_loyalty_points
+#: model:ir.model.fields,field_description:website_loyalty_management.field_res_users_wk_website_loyalty_points
+msgid "Website Loyalty Points"
+msgstr "Puntos de Fidelidad página web"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "What is"
+msgstr "Que es"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "You are allowed to redeem only  once per sale order ,which you have  already redeemed ."
+msgstr "Se le permite canjear sólo una vez por orden de venta, que ya ha redimido."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.confirmation
+msgid "You will get"
+msgstr "Conseguirás"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Your cart is empty  !"
+msgstr "Tu carrito esta vacío  !"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Your loyalty point"
+msgstr "Su punto de fidelidad"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "Your point balance has been updated."
+msgstr "Su saldo de puntos se ha actualizado."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "Your purchase amount ("
+msgstr "La cantidad de su compra ("
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "amount purchase,\n"
+"                            you will be awarded"
+msgstr "importe de la compra,  n Se le otorgará"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "amounts will be reduced from your account."
+msgstr "cantidades se reducirán de su cuenta."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.reward_redem_rule_form_view
+msgid "and"
+msgstr "y"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "first !"
+msgstr "primero !"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message_template
+msgid "login"
+msgstr "iniciar sesión"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "not lie in the point range of any redeem policy,Please try later."
+msgstr "No se encuentran en el rango de puntos de ninguna política de rescate, intente más tarde."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "or More."
+msgstr "o más."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "order completion"
+msgstr "realización de pedidos"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "order confirmation"
+msgstr "confirmación del pedido"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "points ."
+msgstr "puntos ."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "points from this sale order."
+msgstr "los puntos de esta orden de venta."
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "points in your account"
+msgstr "puntos en su cuenta"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.message
+msgid "points worth of"
+msgstr "puntos de valor de"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.reward_redem_rule_form_view
+#: model:ir.ui.view,arch_db:website_loyalty_management.website_loyalty_management_form_view
+msgid "unit of amount !"
+msgstr "Unidad de cantidad!"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "worth"
+msgstr "worth"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "☑Active"
+msgstr "☑Active"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "☑You have"
+msgstr "☑Tienes"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.inherited_website_sale_cart_website_loyalty_management
+msgid "☑You will get"
+msgstr "☑Conseguirás"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.confirmation
+msgid "Loyalty information:"
+msgstr "Información de la lealtad:"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.confirmation
+msgid "☑You will get"
+msgstr "☑Conseguirás"
+
+#. module: website_loyalty_management
+#: model:ir.ui.view,arch_db:website_loyalty_management.confirmation
+msgid "points from this sale order."
+msgstr "los puntos de esta orden de venta."

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="website.Blog.Post">
+        <a t-att-href="blog_post.blog_url" t-field="blog_post.name">
+            <div class="blog_post" t-attf-data-post-id="#{blog_post.id_str}">
+                <div class="oe_snippet_body st-img-blg col-xs-12 col-sm-6 col-md-4">
+                    <img class="img img-responsive shadow mb16" t-att-src="blog_post.bg_img" alt="Blog Post"/>
+                    <div class="textbox">
+                        <div class="text">
+                            <h4><span class="strong"><t t-esc="blog_post.title"/></span></h4>
+                            <hr/>
+                            <p><t t-esc="blog_post.created_date.split(' ')[0]"/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </t>
+
+    <t t-name="website.Blog.PostBox">
+        <div class="wrap-row" contenteditable="false">
+            <div class="blog-row"></div>
+         </div>
+    </t>
+    
+    <t t-name="website.Blog.Error">
+        <div class="alert alert-info" contenteditable="false">
+            <t t-esc="data.error"/>
+                <i t-if='!data.nodata' class="fa fa-plus-circle">
+                    No blog post to read...
+                </i>
+        </div>
+    </t>
+
+</templates>

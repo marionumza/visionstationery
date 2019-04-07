@@ -1,0 +1,135 @@
+.twitter_timeline .wrap-row {
+  height: 520px;
+}
+.wrap-row .twitter-row {
+  position: relative !important;
+  margin-top: 32px;
+}
+.wrap-row .twitter-row div .st-tweet {
+  border: none;
+  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  opacity: 1;
+  border-radius: 25px;
+  background-color: #60B7BA;
+}
+.wrap-row .twitter-row div .st-tweet:hover {
+  box-shadow: none;
+  cursor: inherit;
+}
+.wrap-row .twitter-row div .tweet h4 *, .wrap-row .twitter-row div p a{
+  color: #FFF !important;
+}
+.carousel.carousel_twitter .carousel-inner:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    height: 100%;
+    border-radius: 25px;
+    background: url(/sync_uppercrust_twitter/static/src/img/pattern.png);
+}
+.carousel.carousel_twitter .carousel-inner {
+  width: 70%;
+  height: 235px;
+  border: 2px;
+  border-radius: 25px;
+  background-color: #4FB3B7;
+  margin-left: 15%;
+}
+.twitter_timeline .st_title {
+  margin-top: 65px !important;
+}
+.twitter_timeline .st_title .st-heading-a > h3 {
+  color: #FFF;
+}
+.twitter_timeline .st_title .st-heading-a > h3:not(.small) {
+  font-size: xx-large;
+}
+.twitter_timeline .st_title > hr {
+  border-top: 3px solid #FFF;
+}
+.st-tweet .carousel-img img{
+  display: block;
+  position: absolute;
+  left: 53px;
+  top: 29px;
+  border-radius: 100%;
+  border: 12px solid #8AC8CC;
+  height: 181px;
+  width: 181px;
+  z-index: 3;
+}
+.st-tweet .carousel-content {
+  margin-top: 25px !important;
+  margin-left: 260px;
+  background-color: transparent !important;
+  z-index: 3;
+}
+.st-tweet .carousel-content .text a.date {
+  color: #FFF;
+  font-size: 18px;
+  margin-top: -33px;
+  float: right;
+  margin-right: -65px; 
+  text-decoration: none;
+}
+.st-tweet .carousel-content .text h4{
+  font-size: 16px ! important;
+}
+.st-tweet .carousel-content .text p{
+  line-height: 1.3;
+  text-transform: none !important;
+  font-size: 15px;
+  margin-top: 20px !important;
+  width: 120%;
+}
+.st-tweet .carousel-content .text h4 .strong {
+  display: block;
+  font-size: 1.5em;
+  font-weight: 700;
+ }
+.st-tweet .carousel-content .text h4 span.strong {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.st-tweet .carousel-content .text h4 span.small *{
+  font-size: 1.3em;
+  font-weight: normal;
+  color: #FFF;
+}
+.carousel.carousel_twitter .carousel-control {
+  background-image: none;
+}
+.carousel.carousel_twitter .carousel-control:hover {
+  color: #A2D2D6;
+}
+.carousel.carousel_twitter .carousel-control .fa {
+  top: 40%;
+  font-size: 45px;
+}
+.carousel.carousel_twitter .carousel-control .fa:hover {
+  color: #FFF;
+}
+.carousel.carousel_twitter .carousel-control.left{
+  left: 30px;
+}
+.carousel.carousel_twitter .carousel-control.right{
+  right: 30px;
+}
+.st-tweet-img {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  width: 44px;
+  height: 44px;
+  margin: 0 0 0 -23px;
+  opacity: .8;
+}

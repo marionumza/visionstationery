@@ -1,0 +1,50 @@
+.o_web_client {
+    .o_main {
+        .o_main_content.ad_rightbar {
+            & > .o_content {
+                & > .o_view_manager_content {
+                    .oe_view_nocontent {
+                        width: 100%;
+                        max-width: 100%;
+                        text-align: center;
+                        padding: 10px;
+                        .oe_view_nocontent_create {
+                            margin-top: 40px;
+                            text-transform: uppercase;
+                            color: @font-color;
+                            font-weight: @font-weight-b;
+                            font-size: @font-size-4;
+                            &:before {
+                                content: "\f0f6";
+                                position: relative;
+                                display: block;
+                                font: normal normal normal 14px/1 FontAwesome;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                                font-size: @font-size-11;
+                                width: 100%;
+                                height: 100%;
+                                background: none;
+                                color: @text-muted;
+                                margin: auto;
+                                margin-bottom: 25px;
+                            }
+                        }
+                        & > p {
+                            padding: 0px;
+                            color: @table-row;
+                            font-size: @font-size-0;
+                            &:last-child {
+                                padding-bottom: 15px;
+                            }
+                        }
+                        .oe_empty_custom_dashboard{
+                            background: transparent url(/uppercrust_backend_theme/static/src/img/graph.png) no-repeat 0 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

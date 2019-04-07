@@ -1,0 +1,117 @@
+/*Media 992 and 1200*/
+@media screen and (min-width: @screen-sm-min) and (max-width: @screen-lg-min){
+
+}
+/* Media 786 to 992 MD*/
+@media screen and(min-width: @screen-sm-min) and (max-width: @screen-md-min) {
+  .twitter {
+    height: 100%;
+    .twitter_timeline {
+      height: 100%;
+      .wrap-row {
+        height: 100% !important;
+      }
+      .carousel-inner {
+        height: 100% !important;
+        .item {
+          .carousel-img {
+            text-align: center;
+            margin: auto;
+            img {
+              position: relative;
+              display: initial;
+              left: 0px;
+            }
+          }
+          .carousel-content {
+            margin-left: auto !important;
+            .text {
+              margin-left: 15px;
+              margin-right: 15px;
+              text-align: center;
+              a.date {
+                margin-top: 0px;
+                margin-right: 0px;
+                float: none;
+              }
+              & > p {
+                width: 100%;
+                text-align: center;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* Mobile SM 786 - */
+@media screen and (max-width: @screen-sm-min) {
+  .twitter {
+    height: 100%;
+    .twitter_timeline {
+      .oe_snippet_body {
+        height: 100%;
+        .container {
+          .twitter-row {
+            margin: 0px;
+            .twitter-scroller {
+              .carousel_twitter {
+                .carousel-inner {
+                  height: auto;
+                  .st-tweet {
+                    .carousel-img {
+                      & > img {
+                        position: relative;
+                        text-align: center;
+                        margin: auto;
+                        left: 0;
+                        top: 16px;
+                      }
+                    }
+                    .carousel-content {
+                      float: left;
+                      margin-top: 0px !important;
+                      margin-left: 0px;
+                      max-height: 100%;
+                      .text {
+                        & > h4 {
+                          position: relative;
+                          display: table;
+                          float: left;
+                          width: 100%;
+                          text-align: center;
+                        }
+                        & > a {
+                          float: left;
+                          width: 100%;
+                          display: table;
+                          margin-top: 0px;
+                          text-align: center;
+                        }
+                        & > p {
+                          position: relative;
+                          display: table;
+                          text-align: center;
+                          font-size: 14px;
+                          padding: 15px;
+                          width: 100%;
+                        }
+                      }
+                    }
+                  }
+                }
+                .carousel-control.left {
+                  left: 15px;
+                }
+                .carousel-control.right {
+                  right: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

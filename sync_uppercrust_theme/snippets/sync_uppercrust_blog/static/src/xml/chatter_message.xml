@@ -1,0 +1,16 @@
+<templates id="template" xml:space="preserve">
+    <t t-name="website.thread_message">
+        <li class="media" t-att-id="'message-' + id">
+            <div class="media-left col-md-2 ">
+                <a href="#">
+                    <img class="media-object img-circle" t-att-src="image_url"/>
+                </a>
+            </div>
+            <div class="media-body col-md-10 well">
+                <h4 class="media-heading">
+                    <strong><span t-esc="author"/></strong> <small class="pull-right">just now</small>
+                </h4>
+            </div>
+        </li>
+    </t>
+</templates>

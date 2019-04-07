@@ -1,0 +1,44 @@
+<templates id="template" xml:space="preserve">
+
+    <!-- Chatter Composer -->
+    <t t-extend="portal.chatter_composer">
+    	<t t-jquery=".media-body" t-operation="attributes">
+            <attribute name="style">width: 100% !important;</attribute>
+        </t>
+        <t t-jquery="img" t-operation="attributes">
+            <attribute name="class">img pull-left img-circle</attribute>
+        </t>
+        <t t-jquery=".mb32" t-operation="attributes">
+            <attribute name="class">pull-left mb32 st-fill-cmt-blk</attribute>
+            <attribute name="style">width: 100%;</attribute>
+        </t>
+        <t t-jquery="textarea[name='message']" t-operation="attributes">
+            <attribute name="class">form-control st-txtarea</attribute>
+        </t>
+        <t t-jquery="button[type='submit']" t-operation="replace">
+            <div class="col-md-12 st-btn-blk">
+            	<button t-attf-class="o_portal_chatter_composer_btn btn btn-sm mt8 o_website_message_post_helper st-btn" type="submit">Send</button>
+            </div>
+        </t>
+    </t>
+
+    <!-- Chatter Messages -->
+    <t t-extend="portal.chatter_messages">
+        <t t-jquery=".o_portal_chatter_message" t-operation="attributes">
+            <attribute name="class">media o_portal_chatter_message comments-list</attribute>
+        </t>
+        <t t-jquery=".media-left" t-operation="attributes">
+            <attribute name="class">media-left col-md-2</attribute>
+        </t>
+        <t t-jquery="img" t-operation="attributes">
+            <attribute name="class">media-object img-circle</attribute>
+        </t>
+        <t t-jquery=".media-body" t-operation="attributes">
+            <attribute name="class">media-body col-md-10 well</attribute>
+        </t>
+        <t t-jquery="t[t-raw='message.body']" t-operation="attributes">
+            <attribute name="class">discussion_scroll_post post-msg</attribute>
+        </t>
+    </t>
+
+</templates>

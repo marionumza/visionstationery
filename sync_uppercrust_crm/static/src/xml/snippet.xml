@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Features >  Contact -->
+    <template id="snippet_contact_inherit" inherit_id="website.snippets">
+        <xpath expr="//div[@id='snippet_feature']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="sync_uppercrust_crm.s_contact_us" t-thumbnail="/sync_uppercrust_crm/static/src/img/icon/contact.png"/>
+        </xpath>
+    </template>
+
+    <template id="s_contact_us" name="Contact">
+        <section id="s_contact" data-snippet-id="title" class="oe_snippet_body" style="position:relative">
+            <div class="container contact-title master_background">
+            </div>
+            <div class="col-md-12 oe_cu_snip_contact_title" style="z-index: 1;">
+                <div class="st-heading-a post st_title" data-vp-add-class="visible animated zoomIn" data-vp-remove-class="hidebefore" data-vp-add-class-full-view="full-visible" data-vp-repeat="false" data-vp-offset="100">
+                    <h3 class="text-center st_master_text_color small">CONTACT US</h3>
+                    <h3 class="text-center"><strong>Lorem ipsum</strong> dolor sit amet</h3>
+                </div>
+                <hr/>
+            </div>
+            <div id="wrapper" style="display:table;width:100%;padding: 20px 15px 0px 15px;">
+                <div id="nav_wrapper" style="margin-bottom: 45px;">
+                    <form action="/website_form/" method="post" data-model_name="crm.lead" data-success_page="/contactus-thank-you" class="s_website_form form-horizontal st-cntct-bx-blk st-cntct-form oe_cu_cnt_frm" enctype="multipart/form-data">
+                        <div t-attf-class="form-group #{error and 'contact_name' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <input type="text" class="form-control st-text" name="contact_name" placeholder="Name_" required="True" t-att-value="request.params.get('contact_name', '')"/>
+                            </div>
+                        </div>
+                        <div name="email_from_container" t-attf-class="form-group #{error and 'email_from' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <input type="email" class="form-control st-text" name="email_from" placeholder="Email_" required="True" t-att-value="request.params.get('email_from', '')"/>
+                            </div>
+                        </div>
+                        <div t-attf-class="form-group #{error and 'phone' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <input type="text" placeholder="Phone Number_" class="form-control st-text" name="phone" t-att-value="request.params.get('phone', '')"/>
+                            </div>
+                        </div>
+                        <div t-attf-class="form-group #{error and 'partner_name' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <input type="text" placeholder="Your Company" class="form-control st-text" name="partner_name" t-att-value="request.params.get('partner_name', '')"/>
+                            </div>
+                        </div>
+                        <div t-attf-class="form-group #{error and 'name' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <input type="text" placeholder="Subject_" class="form-control st-text" name="name" t-att-value="request.params.get('name', '')"/>
+                            </div>
+                        </div>
+                        <div t-attf-class="form-group #{error and 'description' in error and 'has-error' or ''}">
+                            <div class="col-md-9 col-sm-8 box-item">
+                                <textarea placeholder="Message_"  class="form-control st-text" name="description" style="min-height: 120px" required="True"><t t-esc="description or ''"/></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 col-sm-12 mt16 box-item-hlf">
+                                <button class="btn btn-primary btn-lg btn-block st-btn oe_cu_box o_website_form_send">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="map_canvas" t-att-data-geo_localize="res_company.get_geo_localize()" t-att-data-res_company_name="res_company.name"/>
+            </div>
+        </section>
+    </template>
+</odoo>

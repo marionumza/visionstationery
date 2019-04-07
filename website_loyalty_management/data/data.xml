@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+	  	<record forcecreate="True" id="decimal_price" model="decimal.precision">
+            <field name="name">Loyalty Points</field>
+            <field name="digits">3</field>
+        </record>
+
+         <record id="product_loyalty_management" model="product.product">
+            <field name="name">Loyalty Benefit</field>
+            <field name="standard_price">0</field>
+            <field name="list_price">0</field>
+            <field name="website_published">1</field>
+            <field name="sale_ok">0</field>
+            <field name="type">service</field>
+            <field name="taxes_id">None</field>
+            <field name="supplier_taxes_id">None</field>
+            <field name="image" type="base64"
+                file="website_loyalty_management/static/description/icon.png"/>
+            <field name="image_small" type="base64"
+                file="website_loyalty_management/static/description/icon.png"/>
+
+        </record>
+
+        <record forcecreate="True"
+            id="website_loyalty_management.website_loyalty_management"
+            model="website.loyalty.management">
+			<field name="name">Loyalty Program</field>
+			<field name="signup_points">333</field>
+			<field name="product_id" ref="product_loyalty_management"/>
+        </record>
+        <record model="website" id="website.default_website">
+            <field name="wk_loyalty_program_id" ref="website_loyalty_management.website_loyalty_management"/>
+          </record>
+
+
+        <function id="set_demo_website_loyalty_management"
+        model="ir.default" name="set"
+        eval="('res.config.settings', 'wk_loyalty_program_id', ref('website_loyalty_management.website_loyalty_management'))"/>
+
+
+
+        <record id="base.partner_root" model="res.partner">
+            <field name="wk_website_loyalty_points">1000</field>
+        </record>
+
+        <record forcecreate="True"
+            id="website_loyalty_management.redeem_rule1"
+            model="reward.redeem.rule">
+            <field name="name">Loyalty Redeem Rule</field>
+            <field name="loyalty_fk" ref="website_loyalty_management.website_loyalty_management"/>
+            <field name="point_start">1</field>
+            <field name="point_end">1000000000000</field>
+            <field name="reward">1</field>
+          </record>
+
+
+    </data>
+</odoo>

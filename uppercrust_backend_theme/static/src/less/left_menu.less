@@ -1,0 +1,269 @@
+// Active menu
+.active-menu() {
+    content: '\f0d9';
+    font: normal normal normal 14px/1 FontAwesome;
+    position: absolute;
+    right: -12px;
+    font-size: 26px;
+    top: 5px;
+}
+
+// Active menu
+
+.o_web_client {
+    .o_main {
+        .ad_leftbar.o_sub_menu {
+            .o_sub_menu_content {
+                display: none;
+                .oe_secondary_menu {
+                    .oe_secondary_menu_section {
+                        margin: 10px 0px;
+                        color: @menu-main-title;
+                        font-weight: normal;
+                        text-transform: uppercase;
+                        font-size: @font-size-13;
+                    }
+                    .oe_secondary_menu_section.link {
+                        border-bottom: none;
+                        color: @brand-primary;
+                        font-weight: bold;
+                    }
+                    ul.oe_secondary_submenu {
+                        margin: 0;
+                        li {
+                            font-size: 14px;
+                            font-weight: bold;
+                            & > a {
+                                span {
+                                    color: @menu-sub-title;
+                                }
+                            }
+                            &.active {
+                                & > a {
+                                    background-color: @tr-hover;
+                                }
+                            }
+                        }
+                        .oe_menu_toggler:not(.oe_menu_opened) {
+                            &:before {
+                                border-left: 4px solid @icon;
+                                opacity: 1;
+                            }
+                        }
+                        .oe_menu_opened {
+                            &:before {
+                                border-top: 4px solid @icon;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                    .ad_main_menu_detals {
+                        display: table;
+                        margin-top: 20px;
+                        margin-bottom: 30px;
+                        text-align: center;
+                        width: 100%;
+                        padding: 6px;
+                        & > .oe_menu_text {
+                            float: left;
+                            width: 100%;
+                            display: table-cell;
+                            text-align: center;
+                            margin-top: 15px;
+                            color: @menu-sub-title;
+                            text-transform: uppercase;
+                            font-weight: @font-weight-6;
+                        }
+                        img {
+                            width: 32px;
+                            margin-right: 10px;
+                            height: 68px;
+                            width: auto;
+                            margin: auto;
+                            display: table-cell;
+                        }
+                    }
+                }
+                div.ad_sub_menu {
+                    padding-left: 65px;
+                    padding-bottom: 25px;
+                    ul.oe_secondary_submenu {
+                        & > li {
+                            & > a {
+                                &:hover, &:focus {
+                                    background-color: @tr-hover;
+                                }
+                            }
+                            &.active {
+                                & > a {
+                                    background-color: @tr-hover;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            #sidebar-menu {
+                -ms-flex: 1 1 auto;
+                -moz-flex: 1 1 auto;
+                -webkit-box-flex: 1;
+                -webkit-flex: 1 1 auto;
+                flex: 1 1 auto;
+                height: 100%;
+                overflow-y: auto;
+                padding-left: 65px;
+                padding-bottom: 25px;
+                .menu_section {
+                    .side-menu {
+                        padding-right: 15px;
+                        & > li {
+                            & > a {
+                                padding: 3px 6px 3px 14px;
+                                background-color: transparent;
+                                color: @menu-main-title;
+                                font-weight: bold;
+                                text-transform: uppercase;
+                            }
+                            &.active {
+                                & > a {
+                                    background-color: @tr-hover;
+                                }
+                            }
+                        }
+                        // for all children
+                        img {
+                            width: 32px;
+                            margin-right: 10px;
+                            height: 32px;
+                        }
+                        // for all children
+                        &:hover {
+                            background-color: @tr-hover;
+                        }
+                    }
+                }
+            }
+            .ad_right_panel {
+                .oe_back_btn {
+                    position: absolute;
+                    top: 56px;
+                    left: 8px;
+                    z-index: 999;
+                    padding: 15px;
+                    border-radius: 50%;
+                    .fa {
+                        font-size: 16px;
+                    }
+                    &:hover {
+                        background-color: @tr-hover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// NO Chile Menu - start
+.ad_nochild {
+    .top_nav {
+        #children_toggle {
+            display: none;
+        }
+    }
+}
+
+// No Chile Menu - stop
+
+// Open Chile Menu - start
+.o_web_client.ad_open_childmenu:not(.ad_nochild) {
+    .o_main {
+        .ad_leftbar.o_sub_menu {
+            left: 0px;
+            .ad_right_panel {
+                .o_sub_menu_logo {
+                    display: none;
+                }
+                .o_sub_menu_content {
+                    display: block;
+                }
+                #sidebar-menu {
+                    display: none !important;
+                }
+            }
+        }
+    }
+}
+
+// Open Chile Menu - start
+
+// Login Message - start
+body {
+    #mb-signout.message-box {
+        display: block;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        background: @bg-light;
+        z-index: 9999;
+        &.open {
+            display: block;
+        }
+        .mb-container {
+            position: absolute;
+            left: 0px;
+            top: 30%;
+            background: @brand-primary;
+            padding: 40px 20px;
+            width: 100%;
+            .mb-middle {
+                width: 50%;
+                left: 25%;
+                position: relative;
+                color: @white;
+                .mb-title {
+                    width: 100%;
+                    float: left;
+                    padding: 10px 0px 0px;
+                    font-weight: @font-weight-4;
+                    line-height: 36px;
+                    .fa, .glyphicon {
+                        float: left;
+                        margin-right: 10px;
+                    }
+                    .fa.fa-sign-out:before {
+                        font-size: @font-size-9;
+                    }
+                }
+                .mb-content {
+                    width: 100%;
+                    float: left;
+                    padding: 10px 0px 0px;
+                    p {
+                        margin-bottom: 0px;
+                    }
+                }
+                .mb-footer {
+                    width: 100%;
+                    float: left;
+                    padding: 10px 0px;
+                    .oe_cu_logout_yes {
+                        background: @brand-secondary;
+                        color: @white;
+                        border-color: @brand-secondary;
+                        min-width: 60px;
+                    }
+                    .mb-control-close {
+                        background: @white;
+                        color: @brand-secondary;
+                        border-color: @brand-secondary;
+                        min-width: 60px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Login Message - stop

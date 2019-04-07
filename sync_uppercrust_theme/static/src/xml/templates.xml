@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="uppercrust_theme.dialog.progressbar">
+        <ul class="list-group">
+            <li class="list-group-item form-group active">
+                <h4 class="list-group-item-heading">
+                    <label for="pbar-color" class="control-label">
+                        Color
+                    </label>
+                </h4>
+                <input class="page form-control pbar-color"
+                       id="pbar-color"/>
+            </li>
+            <li class="list-group-item form-group active">
+                <h4 class="list-group-item-heading">
+                    <label for="pbar-perc" class="control-label">
+                        Progress (%)
+                    </label>
+                </h4>
+                <input class="page form-control pbar-perc"
+                       id="pbar-perc"/>
+            </li>
+            <li class="list-group-item form-group active">
+                <h4 class="list-group-item-heading">
+                    <label for="pbar-time" class="control-label">
+                        Interval (ms)
+                    </label>
+                </h4>
+                <input class="page form-control pbar-time"
+                       id="pbar-time"/>
+            </li>
+        </ul>
+    </t>
+    <t t-name="website.Counter.Reset">
+        <button type="button" contenteditable="false" class="btn btn-primary hover-edition-button">Customize</button>
+    </t>
+    <t t-name="uppercrust_theme.dialog.counter">
+        <ul class="list-group">
+            <li class="list-group-item form-group active">
+                <h4 class="list-group-item-heading">
+                    <label for="stop-counter" class="control-label">
+                        Stop Counter
+                    </label>
+                </h4>
+                <input class="page form-control stop-counter" id="stop-counter"/>
+            </li>
+        </ul>
+        <!-- <div class="oe_base">
+            <div class="modal fade oe_cu_counter_model" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button title="Close" type="button" class="close" data-dismiss="modal">×</button>
+                                <h3 class="modal-title">Customize Counter</h3>
+                        </div>
+                        <div class="modal-body">
+                             <ul class="list-group">
+                                 <li class="list-group-item form-group active">
+                                     <h4 class="list-group-item-heading">
+                                         <label for="stop-counter" class="control-label">
+                                             Stop Counter
+                                         </label>
+                                     </h4>
+                                     <input class="page form-control stop-counter" id="stop-counter"/>
+                                 </li>
+                             </ul>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary save js_counter_save" t-if="!button">Save</button>
+                            <button type="button" class="btn btn-primary save" t-if="button"><t t-raw="button"/></button>
+                            <button type="button" class="btn hidden wait" disabled="disabled"/>
+                            <span> or </span>
+                            <a href="#" data-dismiss="modal" aria-hidden="true" class="oe_discard">Discard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  -->
+    </t>
+    <!-- <t t-name="web_editor.dialog.counter">
+        <t t-call='web_editor.dialog'>
+            <t t-set="title">Customize Counter</t>
+            <form>
+                <ul class="list-group">
+                    <li class="list-group-item form-group active">
+                        <h4 class="list-group-item-heading">
+                            <label for="stop-counter" class="control-label">
+                                Stop Counter
+                            </label>
+                        </h4>
+                        <input class="page form-control stop-counter" id="stop-counter"/>
+                    </li>
+                </ul>
+            </form>
+        </t>
+    </t> -->
+    <t t-name="web_editor.tab.remove">
+        <button id="tab_remove" class="btn btn-danger btn-sm" data-toggle="remove" href="#">Remove</button>
+    </t>
+    <t t-name="web_editor.tab.style2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" t-att-href="widget.action_href">Tab Title </a>
+                </h4>
+            </div>
+            <div t-att-id="widget.action_id" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>TAB: BODY</p>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="web_editor.gallery.style">
+        <div contentEditable="false" class="hover-edition dropdown">
+            <a id="add_gallery" class="btn btn-primary btn-sm" data-toggle="add" href="#">Add</a>
+        </div>
+    </t>
+    <t t-name="web_editor.gallery.image">
+        <div class="oe_snippet_body col-xs-12 col-sm-6 col-md-3">
+            <div class="oe_fader">
+                <div class="text">
+                    <h4><strong>Lorem Ipsum</strong><br/><small> consectetuer</small></h4>
+                    <p>Consectetuer adipiscing elit.</p>
+                    <a href="/sync_uppercrust_theme/static/src/img/img-placeholder.jpg" class="mt32" data-toggle="gallery">
+                        <img src="/sync_uppercrust_theme/static/src/img/img-placeholder.jpg" class="hidden" data-toggle="gallery"/>
+                        <span class="fa fa-search-plus"></span>
+                    </a>
+                </div>
+                <img src="/sync_uppercrust_theme/static/src/img/img-placeholder.jpg" data-toggle="gallery"/>
+            </div>
+        </div>
+    </t>
+</templates>
