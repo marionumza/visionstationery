@@ -113,6 +113,18 @@ class SaleOrderLine(models.Model):
     @api.onchange('product_id')
     def product_id_change(self):
         result = super(SaleOrderLine, self).product_id_change()
+        pricelist_item_obj = self.env['product.pricelist.item']
+        if self.order_id.pricelist_id.pricelist_type == 'tender':
+            pricelist_item_ids = pricelist_item_obj.search([('pricelist_id','=',self.order_id.pricelist_id.id),
+                                        ('product_id','=',self.product_id.id)])
+            if not pricelist_item_ids:
+                pricelist_item_ids = pricelist_item_obj.search([('pricelist_id','=',self.order_id.pricelist_id.id),
+                                        ('product_tmpl_id','=',self.product_id.product_tmpl_id.id)])
+            
+            for pricelist_item in pricelist_item_ids:
+                if pricelist_item.uom_id:
+                     self.update({'product_uom': pricelist_item.uom_id.id})
+                     result.get('domain',{}).update({'product_uom':[('id','=',pricelist_item.uom_id.id)]})
         return result
 
     def _get_domain(self):

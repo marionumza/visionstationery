@@ -21,3 +21,25 @@ class ProductPricelistItem(models.Model):
         self.ensure_one()
         if self.applied_on in ['3_global', '2_product_category']:
             self.uom_id = False
+    
+    @api.onchange('product_id')
+    def onchange_product_id(self):
+        self.ensure_one()
+        domain = {'uom_id':[]}
+        if self.product_id:
+            domain.update({'uom_id': [('category_id', '=', self.product_id.uom_id.category_id.id)]})
+        result = {'domain': domain}
+        return result
+    
+    @api.onchange('product_tmpl_id')
+    def onchange_product_tmpl_id(self):
+        self.ensure_one()
+        domain = {'uom_id':[]}
+        if self.product_tmpl_id:
+            domain.update({'uom_id': [('category_id', '=', self.product_tmpl_id.uom_id.category_id.id)]})
+        result = {'domain': domain}
+        return result
+
+        
+        
+  
