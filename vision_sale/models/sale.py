@@ -124,7 +124,7 @@ class SaleOrderLine(models.Model):
             for pricelist_item in pricelist_item_ids:
                 if pricelist_item.uom_id:
                      self.update({'product_uom': pricelist_item.uom_id.id})
-                     result.get('domain',{}).update({'product_uom':[('id','=',pricelist_item.uom_id.id)]})
+                     result.get('domain', {}).update({'product_uom': [('id', '=', pricelist_item.uom_id.id)]})
         return result
 
     def _get_domain(self):
@@ -136,3 +136,4 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         domain = []
         return domain
+
