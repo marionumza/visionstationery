@@ -1,0 +1,48 @@
+<odoo>
+    <menuitem name="Web Orders"
+        id="web_order_menuitem"
+        action="action_web_order"
+        parent="sale.sale_menu_root"
+        sequence="2"
+    />
+
+    <menuitem name="Blanket Orders"
+        id="blanket_menuitem"
+        parent="sale.sale_menu_root"
+        sequence="3"
+    />
+
+    <menuitem name="Blanket Contracts"
+        id="blanket_contracts_menuitem"
+        action="action_blanket_contract"
+        parent="blanket_menuitem"
+        sequence="10"
+    />
+
+    <menuitem name="Blanket Orders"
+        id="blanket_order_menuitem"
+        action="action_blanket_order"
+        parent="blanket_menuitem"
+        sequence="20"
+    />
+
+    <menuitem id="sale.menu_sale_invoicing"
+            name="Invoicing"
+            parent="sale.sale_menu_root"
+            sequence="20" groups="sales_team.group_sale_salesman"/>
+
+    <menuitem id="sale.product_menu_catalog" name="Catalog" action="product.product_template_action"
+              parent="sale.sale_menu_root" sequence="30" groups="sales_team.group_sale_salesman"/>
+
+    <menuitem id="sale.menu_sale_report"
+            name="Reporting"
+            parent="sale.sale_menu_root"
+            sequence="40"
+            groups="sales_team.group_sale_manager"/>
+
+    <menuitem id="sale.menu_sale_config"
+            name="Configuration"
+            parent="sale.sale_menu_root"
+            sequence="60"
+            groups="sales_team.group_sale_manager"/>
+</odoo>
