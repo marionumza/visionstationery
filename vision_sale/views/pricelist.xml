@@ -17,19 +17,4 @@
         </field>
     </record>
 
-    <record id="product_pricelist_item_form_view" model="ir.ui.view">
-        <field name="name">vision pricelist item form</field>
-        <field name="model">product.pricelist.item</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
-        <field name="arch" type="xml">
-            <data>
-                <field name="date_end" position="after">
-                    <field name="uom_id"
-                           attrs="{'invisible': [('applied_on', 'in', ['3_global', '2_product_category'])]}"/>
-                </field>
-            </data>
-        </field>
-    </record>
-
 </odoo>

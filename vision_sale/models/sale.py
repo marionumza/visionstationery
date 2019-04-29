@@ -22,6 +22,17 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
 
+    def _assign_name(self):
+        self.ensure_one()
+        if self.name == _('Draft'):
+            if self.company_id:
+                return self.env['ir.sequence'].with_context(force_company=self.company_id.id).next_by_code(
+                    'sale.order') or _('Draft')
+            else:
+                return self.env['ir.sequence'].next_by_code('sale.order') or _('Draft')
+        else:
+            return self.name
+
     @api.multi
     def action_confirm(self):
         res = True
@@ -34,11 +45,7 @@ class SaleOrder(models.Model):
                     raise ValidationError(_('Order %s is not approved') % rec.name)
                 res = super(SaleOrder, self).action_confirm()
 
-            if self.name == _('Draft'):
-                if rec.company_id:
-                    vals['name'] = self.env['ir.sequence'].with_context(force_company=self.company_id.id).next_by_code('sale.order') or _('Draft')
-                else:
-                    vals['name'] = self.env['ir.sequence'].next_by_code('sale.order') or _('Draft')
+            vals['name'] = rec._assign_name()
             rec.write(vals)
         return res
 
@@ -100,112 +107,57 @@ class SaleOrder(models.Model):
                 rec.write({'state': 'approved'})
                 rec.action_confirm()
                 continue
-
-            if not self.env.user.has_group('base.group_system'):
+            line_ids = rec.order_line
+            need_approve = any(line_ids.need_approve())
+            if need_approve and not self.env.user.has_group('base.group_system'):
                 raise ValidationError('You are not authorised to approve quotations')
-            rec.write({'state': 'approved'})
+
+            vals = {'state': 'approved'}
+            vals['name'] = rec._assign_name()
+            rec.write(vals)
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
+    state = fields.Selection([
+        ('draft', 'Quotation'),
+        ('approved', 'Approved'),
+        ('sent', 'Quotation Sent'),
+        ('sale', 'Sales Order'),
+        ('done', 'Done'),
+        ('cancel', 'Cancelled'),
+    ], related='order_id.state', string='Order Status', readonly=True, copy=False, store=True, default='draft')
 
-    @api.multi
-    @api.onchange('product_id')
-    def product_id_change(self):
-        if not self.product_id:
-            return {'domain': {'product_uom': []}}
+    price_unit = fields.Float('Unit Price', readonly=True, states={'draft': [('readonly', False)]})
+    blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
 
-        vals = {}
-        domain = {'product_uom': [('category_id', '=', self.product_id.uom_id.category_id.id)]}
-        if not self.product_uom or (self.product_id.uom_id.id != self.product_uom.id):
-            vals['product_uom'] = self.product_id.uom_id
-            vals['product_uom_qty'] = 1.0
+    def _compute_blanket_qty(self):
+        for rec in self:
+            rec.blanket_delivered_qty = 0.0
 
-        product = self.product_id.with_context(
-            lang=self.order_id.partner_id.lang,
-            partner=self.order_id.partner_id.id,
-            quantity=vals.get('product_uom_qty') or self.product_uom_qty,
-            date=self.order_id.date_order,
-            pricelist=self.order_id.pricelist_id.id,
-            uom=self.product_uom.id,
-            product = self.product_id.id
-        )
+    @api.constrains('price_unit')
+    def check_status_before_update_price(self):
+        for rec in self:
+            if rec.state != 'draft':
+                raise ValidationError(_('You cannot modify the price for an approved order. Set it to draft first'))
 
-        result = {'domain': domain}
-
-        title = False
-        message = False
-        warning = {}
-        if product.sale_line_warn != 'no-message':
-            title = _("Warning for %s") % product.name
-            message = product.sale_line_warn_msg
-            warning['title'] = title
-            warning['message'] = message
-            result = {'warning': warning}
-            if product.sale_line_warn == 'block':
-                self.product_id = False
-                return result
-
-        name = product.name_get()[0][1]
-        if product.description_sale:
-            name += '\n' + product.description_sale
-        vals['name'] = name
-
-        self._compute_tax_id()
-
-        if self.order_id.pricelist_id and self.order_id.partner_id:
-            vals['price_unit'] = self.env['account.tax']._fix_tax_included_price_company(self._get_display_price(product), product.taxes_id, self.tax_id, self.company_id)
-        self.update(vals)
-        
-        pricelist_item_obj = self.env['product.pricelist.item']
-#         if self.order_id.pricelist_id.pricelist_type == 'tender':
-        pricelist_item_ids = pricelist_item_obj.search([('pricelist_id','=',self.order_id.pricelist_id.id),
-                                                        ('product_id','=',product.id)])
-        if not pricelist_item_ids:
-            pricelist_item_ids = pricelist_item_obj.search([('pricelist_id','=',self.order_id.pricelist_id.id),
-                                                            ('product_tmpl_id','=',product.product_tmpl_id.id)])
-            
-        for pricelist_item in pricelist_item_ids:
-            if pricelist_item.uom_id:
-                self.update({'product_uom': pricelist_item.uom_id.id})
-                     
-        uom_list_ids = pricelist_item_ids.mapped('uom_id.id')
-        result.get('domain', {}).update({'product_uom': [('id', 'in', uom_list_ids)]})
-        
-        
-        
-        return result
-
-
-
+    @api.one
+    def need_approve(self):
+        """
+        for a singleton
+        :return: True if the price_unit is outside the predefine range
+        """
+        product_id = self.product_id
+        min_price, max_price = product_id.min_price, product_id.max_price
+        res = min_price == 0.0 or max_price == 0.0 or (self.price_unit < min_price or self.price_unit > max_price)
+        return res
 
     @api.onchange('product_uom', 'product_uom_qty')
     def product_uom_change(self):
-        if not self.product_uom or not self.product_id:
-            self.price_unit = 0.0
-            return
-        if self.order_id.pricelist_id and self.order_id.partner_id:
-            product = self.product_id.with_context(
-                lang=self.order_id.partner_id.lang,
-                partner=self.order_id.partner_id.id,
-                quantity=self.product_uom_qty,
-                date=self.order_id.date_order,
-                pricelist=self.order_id.pricelist_id.id,
-                uom=self.product_uom.id,
-                fiscal_position=self.env.context.get('fiscal_position'),
-                product = self.product_id.id
-            )
-            
-            self.price_unit = self.env['account.tax']._fix_tax_included_price_company(self._get_display_price(product), product.taxes_id, self.tax_id, self.company_id)
+        sale_channel = self.order_id.team_id and self.order_id.team_id.id or False
+        blanket_channel = self.env.ref('vision_sale.vision_blanket_team') and self.env.ref(
+            'vision_sale.vision_blanket_team').id or False
 
-    def _get_domain(self):
-        """
-        for a singleton, get the list of allowable uom for the selected product
-        the list of allowable uom is taken from the pricelist
-        :return: list of id for uom [ , , ]
-        """
-        self.ensure_one()
-        domain = []
-        return domain
-
+        if not sale_channel or (sale_channel != blanket_channel):
+            return super(SaleOrderLine, self).product_uom_change()

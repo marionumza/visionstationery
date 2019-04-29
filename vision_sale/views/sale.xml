@@ -14,36 +14,6 @@
         </field>
     </record>
 
-    <record id="action_blanket_contract" model="ir.actions.act_window">
-        <field name="name">Blanket Contracts</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">sale.order</field>
-        <field name="domain" eval="[('team_id', '=', ref('vision_blanket_team')), ('blanket','=', True)]"/>
-        <field name="context" eval="{'default_team_id': ref('vision_blanket_team'), 'default_blanket': 1}"/>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new service order.
-            </p>
-        </field>
-    </record>
-
-    <record id="action_blanket_order" model="ir.actions.act_window">
-        <field name="name">Blanket Orders</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">sale.order</field>
-        <field name="domain" eval="[('team_id', '=', ref('vision_blanket_team')), ('blanket','=', False)]"/>
-        <field name="context" eval="{'default_team_id': ref('vision_blanket_team'), 'default_blanket': 0}"/>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Create a new service order.
-            </p>
-        </field>
-    </record>
-
     <record id="view_order_form_inherit" model="ir.ui.view">
         <field name="name">vision sale form</field>
         <field name="model">sale.order</field>
@@ -82,12 +52,19 @@
                 </field>
 
                 <field name='user_id' position='before'>
-                    <field name='blanket'/>
+                    <field name='blanket' class="oe_read_only"/>
+                </field>
+
+                <field name='team_id' position='replace'>
+                    <field name='team_id' options="{'no_create': True}" class="oe_read_only"/>
                 </field>
 
             </data>
 
         </field>
     </record>
+
+
+
 
 </odoo>

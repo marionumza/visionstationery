@@ -15,21 +15,15 @@
     'summary': """Customised Sales for Vision Stationery""",
     'category': 'Sale',
     'version': '11.0.1',
-        'description': """
-Customised Sales for Vision Stationery
-==================================================
-    - last update: 27-APR-2019
-    
-        
-    """,
-
     'author': "Alitec Pte Ltd",
     'depends': [
         'sale', 'stock', 'stock_request'
     ],
     'data': ['data/crm.team.csv',
              'data/server_action.xml',
+             'views/product.xml',
              'views/sale.xml',
+             'views/blanket_sale.xml',
              'views/pricelist.xml',
              'views/warehouse.xml',
              'views/menu.xml'
