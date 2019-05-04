@@ -1,0 +1,33 @@
+-
+  !record {id: vs_pen, model: product.product}:
+    name: Pen
+    type: product
+    min_price: 0.5
+    max_price: 1.5
+-
+  !record {id: vs_pencil, model: product.product}:
+    name: Pencil
+    type: product
+    min_price: 0.3
+    max_price: 1.2
+-
+  !record {id: vs_paper_a4, model: product.product}:
+    name: Paper A4
+    type: product
+    min_price: 10
+    max_price: 15
+-
+  !record {id: vs_dvd, model: product.product}:
+    name: DVD
+    type: product
+    min_price: 1
+    max_price: 1.2
+-
+  !record {id: vs_eraser, model: product.product}:
+    name: Eraser
+    type: product
+    min_price: 0.8
+    max_price: 1.0
+
+
+

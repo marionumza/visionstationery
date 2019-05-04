@@ -33,4 +33,4 @@ Min and Max Sell Price
 ----------------------
 
 * Products can have a min and max sell price
-* If quoted price is within the range, anybody can approve the quotation
+* If quoted price is outside the range, the quotation cannot be saved

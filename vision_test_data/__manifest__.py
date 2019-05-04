@@ -11,19 +11,14 @@
 ##############################################################################
 {
 
-    'name': "Vision Sales",
-    'summary': """Customised Sales for Vision Stationery""",
-    'category': 'Sale',
+    'name': "Vision Test Data",
+    'summary': """Test for Vision Stationery""",
     'version': '11.0.1',
     'author': "Alitec Pte Ltd",
     'depends': [
-        'sale', 'stock', 'sale_stock'
+        'sale', 'stock'
     ],
-    'data': ['data/crm.team.csv',
-             'views/product.xml',
-             'views/sale.xml',
-             'views/blanket_sale.xml',
-             'views/pricelist.xml',
-             'views/menu.xml'
+    'data': ['data/product.yml',
+             'data/partner.yml'
     ],
 }

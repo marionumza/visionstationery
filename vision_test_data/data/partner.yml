@@ -1,0 +1,12 @@
+-
+  !record {id: vs_customer1, model: res.partner}:
+    name: Customer 01
+    customer: 1
+-
+  !record {id: vs_customer2, model: res.partner}:
+    name: Customer 02
+    customer: 1
+-
+  !record {id: vs_customer3, model: res.partner}:
+    name: Customer 03
+    customer: 1

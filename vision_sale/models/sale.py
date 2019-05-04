@@ -103,13 +103,12 @@ class SaleOrder(models.Model):
         special_team_domain = [web_team, blanket_team]
 
         for rec in self:
+
             if rec.team_id and rec.team_id.id in special_team_domain:
                 rec.write({'state': 'approved'})
                 rec.action_confirm()
                 continue
-            line_ids = rec.order_line
-            need_approve = any(line_ids.need_approve())
-            if need_approve and not self.env.user.has_group('base.group_system'):
+            if not self.env.user.has_group('base.group_system'):
                 raise ValidationError('You are not authorised to approve quotations')
 
             vals = {'state': 'approved'}
@@ -142,17 +141,6 @@ class SaleOrderLine(models.Model):
             if rec.state != 'draft':
                 raise ValidationError(_('You cannot modify the price for an approved order. Set it to draft first'))
 
-    @api.one
-    def need_approve(self):
-        """
-        for a singleton
-        :return: True if the price_unit is outside the predefine range
-        """
-        product_id = self.product_id
-        min_price, max_price = product_id.min_price, product_id.max_price
-        res = min_price == 0.0 or max_price == 0.0 or (self.price_unit < min_price or self.price_unit > max_price)
-        return res
-
     @api.onchange('product_uom', 'product_uom_qty')
     def product_uom_change(self):
         sale_channel = self.order_id.team_id and self.order_id.team_id.id or False
@@ -161,3 +149,6 @@ class SaleOrderLine(models.Model):
 
         if not sale_channel or (sale_channel != blanket_channel):
             return super(SaleOrderLine, self).product_uom_change()
+
+    def _onchange_product_id_check_availability(self):
+        return {}

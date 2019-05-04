@@ -14,6 +14,8 @@
     </record>
 
     <menuitem action="stock.action_warehouse_form" id="menu_action_warehouse_form"
-            parent="stock_request.menu_stock_request_operations" sequence="5"/>
+            parent="stock_request.menu_stock_request_operations" sequence="50"/>
+
+
 
 </odoo>

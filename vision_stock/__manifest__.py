@@ -11,19 +11,16 @@
 ##############################################################################
 {
 
-    'name': "Vision Sales",
-    'summary': """Customised Sales for Vision Stationery""",
-    'category': 'Sale',
+    'name': "Vision Stock",
+    'summary': """Customised Stock for Vision Stationery""",
+    'category': 'Stock',
     'version': '11.0.1',
     'author': "Alitec Pte Ltd",
     'depends': [
-        'sale', 'stock', 'sale_stock'
+        'sale', 'stock', 'stock_request'
     ],
-    'data': ['data/crm.team.csv',
-             'views/product.xml',
-             'views/sale.xml',
-             'views/blanket_sale.xml',
-             'views/pricelist.xml',
-             'views/menu.xml'
+    'data': ['data/server_action.xml',
+             'views/warehouse.xml',
+             'views/picking.xml',
     ],
 }

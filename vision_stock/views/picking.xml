@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking request rename.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock_request.view_picking_form"/>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@name='button_box']/button[@name='action_view_stock_request']/field[@name='stock_request_count']" position="attributes">
+                    <attribute name="string">Request (Origin)</attribute>
+                </xpath>
+            </data>
+        </field>
+
+    </record>
+
+    <record id="action_picking_for_pack_form" model="ir.actions.act_window">
+        <field name="name">Pick/Pack Orders</field>
+        <field name="res_model">stock.picking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('picking_type_id.name', '=', 'Pick')]</field>
+    </record>
+
+    <menuitem id="packing_order_menu"
+              name="Pick/Pack Orders"
+              parent="stock_request.menu_stock_request_operations"
+              action="action_picking_for_pack_form"
+              groups="stock_request.group_stock_request_order"
+              sequence="10"/>
+
+</odoo>
