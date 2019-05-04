@@ -1,7 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_loyalty_user,loyalty.user,model_website_loyalty_management,,1,0,0,0
-access_loyalty_history_user,loyalty.history.user,model_website_loyalty_history,,1,1,1,0
-access_loyalty_redeem_user,reward.redeem.rule,model_reward_redeem_rule,,1,1,1,0
-access_loyalty_manager,loyalty.manager,model_website_loyalty_management,sales_team.group_sale_manager,1,1,1,1
-access_history_manager,loyalty.history,model_website_loyalty_history,sales_team.group_sale_manager,1,1,1,1
-access_redeem_manager,reward.redeem.rule,model_reward_redeem_rule,sales_team.group_sale_manager,1,1,1,1
