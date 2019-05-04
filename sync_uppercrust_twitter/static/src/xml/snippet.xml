@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <template id="website_twitter_snippet" name="Twitter snippet" inherit_id="website_twitter.website_twitter_snippet">
-        <xpath expr="//img[@src='/website/static/src/img/blocks/twitter_scroll.png']" position="replace">
-           <img class="oe_snippet_thumbnail_img" src="/sync_uppercrust_twitter/static/src/img/icon/twitter_scroll.png"/>
-        </xpath>
-    </template>
-</odoo>
