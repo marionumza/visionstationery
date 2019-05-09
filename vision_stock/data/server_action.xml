@@ -11,7 +11,7 @@
     </record>
 
     <record id="action_request_stock_from_picking" model="ir.actions.server">
-        <field name="name">Request Stock</field>
+        <field name="name">Request Stock for Selected Orders</field>
         <field name="type">ir.actions.server</field>
         <field name="state">code</field>
         <field name="model_id" ref="vision_stock.model_stock_picking"/>

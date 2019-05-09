@@ -9,9 +9,22 @@
                 <xpath expr="//div[@name='button_box']/button[@name='action_view_stock_request']/field[@name='stock_request_count']" position="attributes">
                     <attribute name="string">Request (Origin)</attribute>
                 </xpath>
+
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="show_supply_request" type="object" class="oe_stat_button" icon="fa-box-open"
+                        attrs="{'invisible':[('supply_request_ids', '=', [])]}">
+                        <field name="supply_request_count" widget="statinfo"
+                           string="Supply"/>
+                        <field name="supply_request_ids" invisible="1"/>
+                    </button>
+                </xpath>
+
+                <xpath expr="//notebook/page[@name='extra']/group/group/field[@name='picking_type_id']" position="after">
+                    <field name="supply_request_ids" widget="many2many_tags"/>
+                </xpath>
+
             </data>
         </field>
-
     </record>
 
     <record id="action_picking_for_pack_form" model="ir.actions.act_window">
@@ -21,6 +34,7 @@
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('picking_type_id.name', '=', 'Pick')]</field>
+        <field name="context">{'search_default_waiting':1}</field>
     </record>
 
     <menuitem id="packing_order_menu"

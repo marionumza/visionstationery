@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="stock_request_order_form" model="ir.ui.view">
+        <field name="name">stock request form inherit</field>
+        <field name="model">stock.request.order</field>
+        <field name="inherit_id" ref="stock_request.stock_request_order_form"/>
+        <field eval="12" name="priority"/>
+        <field name="arch" type="xml">
+            <data>
+                <notebook position="inside">
+                    <page name="other" string="Other">
+                        <group>
+                            <group>
+                                <field name="origin"/>
+                                <field name="origin_picking_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </data>
+        </field>
+    </record>
+
+    <record id="view_account_search" model="ir.ui.view">
+        <field name="name">stock.request.order.search</field>
+        <field name="model">stock.request.order</field>
+        <field name="arch" type="xml">
+            <search string="Stock Request Order">
+                <field name="name"/>
+                <filter name="ongoing" string="On going" domain="[('state','in',['draft', 'open'])]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window"
+            id="stock_request.stock_request_order_action">
+        <field name="context">{'search_default_ongoing':1}</field>
+    </record>
+</odoo>

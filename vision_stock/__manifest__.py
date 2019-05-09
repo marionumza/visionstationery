@@ -22,5 +22,7 @@
     'data': ['data/server_action.xml',
              'views/warehouse.xml',
              'views/picking.xml',
+             'views/stock_request.xml',
+             'wizard/similar_pick_wizard.xml'
     ],
 }

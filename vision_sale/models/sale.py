@@ -131,6 +131,15 @@ class SaleOrderLine(models.Model):
     price_unit = fields.Float('Unit Price', readonly=True, states={'draft': [('readonly', False)]})
     blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
 
+    @api.constrains('price_unit')
+    def _check_price_within_allowed_range(self):
+        for rec in self:
+            if not rec.product_id:
+                continue
+            if rec.price_unit < rec.product_id.min_price or rec.price_unit > rec.product_id.max_price:
+                raise ValidationError('Unit Price for product %s is out of the allowed range' % rec.product_id.name)
+        return True
+
     def _compute_blanket_qty(self):
         for rec in self:
             rec.blanket_delivered_qty = 0.0

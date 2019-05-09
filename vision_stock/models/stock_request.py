@@ -9,6 +9,9 @@ _logger = logging.getLogger(__name__)
 class StockRequestOrder(models.Model):
     _inherit = 'stock.request.order'
 
+    origin = fields.Char('Source Document')
+    origin_picking_ids = fields.Many2many('stock.picking', 'origin_picking_request', 'request_id', 'picking_id', string='Source Picking')
+
     @api.model
     def create_from_stock_move(self, stock_move_ids=None):
         """
@@ -23,6 +26,8 @@ class StockRequestOrder(models.Model):
 
         if not stock_move_ids:
             return
+        picking_name = stock_move_ids.mapped('picking_id.name')
+        picking_name = len(picking_name)>0 and ", ".join(picking_name)
 
         location_id, warehouse_id = self._get_location_warehouse(stock_move_ids=stock_move_ids)
         expected_date = fields.Datetime.now()
@@ -35,6 +40,7 @@ class StockRequestOrder(models.Model):
                       'picking_policy': 'direct',
                       'expected_date': expected_date,
                       'stock_request_ids': values,
+                      'origin': picking_name            # Note: the link between picking and request is done in the stock.picking module
                       }
         order_id = self.env['stock.request.order'].create(order_vals)
 
@@ -102,11 +108,3 @@ class StockRequestOrder(models.Model):
         vals = [(0, 0, item[2]) for item in vals if item[2]['route_id']]
         return vals
 
-
-
-
-
-
-
-
-        return vals

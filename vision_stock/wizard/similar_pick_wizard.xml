@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="similar_pick_wizard_form" model="ir.ui.view">
+            <field name="name">Similar Picking</field>
+            <field name="model">similar.pick.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="picking_id"/>
+                            <field name="delivery_date"/>
+                        </group>
+
+                        <group>
+                            <field name="number_similar_pick"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Similar Picking">
+                            <group>
+                                <button name="action_get_similar" string="Get" type="object" class="btn-primary"/>
+                            </group>
+                            <field name="line_ids">
+                                <tree create="false">
+                                    <field name="pick_id"/>
+                                    <field name="nb_line"/>
+                                    <field name="nb_similar_line"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                    <footer>
+                        <button name="action_request" string="Request stock" type="object" class="btn-primary"/>
+                        <button name="cancel" string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window
+            id="request_stock_auto_select"
+            name="Request Stock with Auto Selection"
+            src_model="stock.picking"
+            res_model="similar.pick.wizard"
+            target="new"
+            view_mode="form"
+            multi="False"
+            key2="client_action_multi"
+        />
+    </data>
+</odoo>

@@ -18,8 +18,9 @@ class ProductProduct(models.Model):
         self.ensure_one()
         if not warehouse:
             return
-        ctx = self.env.context
-        ctx['warehouse'] = warehouse
+        # ctx = self.env.context
+        # ctx['warehouse'] = warehouse
+        ctx = {'warehouse': warehouse}
         domain_quant = self.env['product.product'].with_context(ctx)._get_domain_locations()[0]
         domain_quant.append(('product_id', '=', self.id))
         quant_ids = self.env['stock.quant'].search(domain_quant)
