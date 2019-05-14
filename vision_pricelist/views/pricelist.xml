@@ -23,9 +23,41 @@
         <field name="inherit_id" ref="product.product_pricelist_view"/>
         <field name="arch" type="xml">
             <data>
+
                 <field name="country_group_ids" position="replace">
                     <field name="pricelist_type" widget="radio"/>
                 </field>
+
+                <xpath expr="//div[@groups='product.group_pricelist_item']" position="replace">
+                    <notebook>
+                        <page name="item" string="Items">
+                            <div groups="product.group_pricelist_item">
+                                <separator string="Pricelist Items"/>
+                                <field name="item_ids" nolabel="1" context="{'default_base':'list_price'}">
+                                    <tree string="Pricelist Items">
+                                        <field name="name" string="Applicable On"/>
+                                        <field name="min_quantity"/>
+                                        <field name="date_start"/>
+                                        <field name="date_end"/>
+                                        <field name="price" string="Price"/>
+                                        <field name="base" invisible="1"/>
+                                        <field name="price_discount" invisible="1"/>
+                                        <field name="applied_on" invisible="1"/>
+                                        <field name="compute_price" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </div>
+                        </page>
+                        <page name="info" string="Information" attrs="{'invisible': [('pricelist_type', '=', 'public')]}">
+                            <field name="partner_ids">
+                                <tree create="false">
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
             </data>
         </field>
     </record>
