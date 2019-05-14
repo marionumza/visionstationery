@@ -12,13 +12,13 @@
 {
 
     'name': "Vision Pricelist",
-    'summary': """Pricelist Rules with Uom""",
+    'summary': """Pricelist Rules""",
     'category': 'Sale',
     'version': '11.0.1',
         'description': """
 Customised Pricelist for Vision Stationery
 ===========================================
-    - last update: 27-APR-2019
+    - last update: 14-MAY-2019
     
         
     """,
@@ -26,6 +26,7 @@ Customised Pricelist for Vision Stationery
     'author': "Alitec Pte Ltd",
     'depends': ['sale'
     ],
-    'data': ['views/pricelist.xml',
+    'data': ['views/sale.xml',
+             'views/pricelist.xml',
     ],
 }

@@ -7,6 +7,9 @@ from odoo.exceptions import ValidationError
 class ProductPricelist(models.Model):
     _inherit = 'product.pricelist'
 
+    pricelist_type = fields.Selection([('public', 'Public'),
+                                       ('tender', 'Tender')], string='Type', default='public')
+
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
         """ Low-level method - Mono pricelist, multi products

@@ -1,19 +1,14 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-from odoo.exceptions import ValidationError
+from odoo.exceptions import AccessError, UserError, RedirectWarning, ValidationError, Warning
+from odoo import tools
 
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=True, help="Pricelist for current sales order Line.")
-
-    
-#     @api.multi
-#     @api.onchange('pricelist_id')
-#     def orderline_pricelist_id_change(self):
-#         return self.product_id_change()
         
     @api.multi
     def _get_display_price(self, product):
@@ -32,9 +27,8 @@ class SaleOrderLine(models.Model):
         # negative discounts (= surcharge) are included in the display price
         return max(base_price, final_price)
     
-    
     @api.multi
-    @api.onchange('product_id','pricelist_id')
+    @api.onchange('product_id', 'pricelist_id')
     def product_id_change(self):
         if not self.product_id:
             return {'domain': {'product_uom': []}}

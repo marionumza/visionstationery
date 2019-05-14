@@ -11,6 +11,29 @@ class StockRequestOrder(models.Model):
 
     origin = fields.Char('Source Document')
     origin_picking_ids = fields.Many2many('stock.picking', 'origin_picking_request', 'request_id', 'picking_id', string='Source Picking')
+    origin_count = fields.Integer('Origin Count', compute='_compute_origin_count')
+
+    @api.multi
+    def _compute_origin_count(self):
+        for rec in self:
+            rec.origin_count = len(rec.origin_picking_ids)
+
+    @api.multi
+    def action_view_origin(self):
+        self.ensure_one()
+        action = {'name': 'Stock Picking',
+                  'type': 'ir.actions.act_window',
+                  'views': [[False, 'tree'], [False, 'form']],
+                  'target': 'current',
+                  'res_model': 'stock.picking'}
+        if len(self.origin_picking_ids) > 1:
+            action['domain'] = "[('id', 'in', %s)]" % self.origin_picking_ids.ids
+        elif len(self.origin_picking_ids) == 1:
+            action['views'] = [(False, 'form')]
+            action['res_id'] = self.origin_picking_ids.ids[0]
+        else:
+            action = {'type': 'ir.actions.act_window_close'}
+        return action
 
     @api.model
     def create_from_stock_move(self, stock_move_ids=None):

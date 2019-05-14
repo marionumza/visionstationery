@@ -1,26 +1,10 @@
 <odoo>
-
-    <record id="product_pricelist_item_form_view" model="ir.ui.view">
-        <field name="name">vision pricelist item form</field>
-        <field name="model">product.pricelist.item</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
-        <field name="arch" type="xml">
-            <data>
-                <field name="date_end" position="after">
-                    <field name="uom_id"
-                           attrs="{'invisible': [('applied_on', 'in', ['3_global', '2_product_category'])]}"/>
-                </field>
-            </data>
-        </field>
-    </record>
-    
-    
     <record id="view_order_form_inherit_pricelist" model="ir.ui.view">
 	    <field name="name">sale.order.inherit.pricelist.form</field>
 	    <field name="model">sale.order</field>
 	    <field name="inherit_id" ref="sale.view_order_form"/>
 	    <field name="arch" type="xml">
+
 	    	<xpath expr="//field[@name='order_line']" position="attributes">
 	    		<attribute name="context">{'default_pricelist_id':pricelist_id}</attribute>
 	    	</xpath>
@@ -34,10 +18,11 @@
 	                  force_save="1"
 	                 />
 	        </xpath>
-	    	<xpath expr="//field[@name='order_line']/form/group/group/div/field[@name='product_uom_qty']" position="replace">
+
+			<xpath expr="//field[@name='order_line']/form/group/group/div/field[@name='product_uom_qty']" position="replace">
 				<field
                     context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': parent.company_id}"
-                    name="product_uom_qty" class="oe_inline"/>    	
+                    name="product_uom_qty" class="oe_inline"/>
 	    	</xpath>
 	    	<xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="replace">
 	    		<field name="pricelist_id" groups="product.group_sale_pricelist"/>
@@ -54,5 +39,4 @@
 	    	</xpath>
 	    </field>
 	 </record>
-
 </odoo>

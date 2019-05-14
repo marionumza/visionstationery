@@ -23,7 +23,6 @@
              'views/product.xml',
              'views/sale.xml',
              'views/blanket_sale.xml',
-             'views/pricelist.xml',
              'views/menu.xml'
     ],
 }
