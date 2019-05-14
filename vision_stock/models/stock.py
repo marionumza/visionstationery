@@ -8,6 +8,9 @@ _logger = logging.getLogger(__name__)
 
 class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
+    _order = 'sequence,name,id'
+
+    sequence = fields.Integer('Priority', default=10)
 
     def create_resupply_move(self):
         """

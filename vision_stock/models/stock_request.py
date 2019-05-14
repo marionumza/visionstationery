@@ -94,17 +94,30 @@ class StockRequestOrder(models.Model):
         if not vals or not warehouse_id:
             return
 
-        normal_wh, automated_wh, normal_route, automated_route = warehouse_id.get_wh_and_route()
+        route_ids = self.env['stock.location.route'].search([('warehouse_selectable', '=', True),
+                                                             ('warehouse_ids', 'in', [warehouse_id.id]),
+                                                             ('stock_request_rule', '=', True)])
+        route_ids = len(route_ids) > 0 and route_ids.sorted(key=lambda r: r.sequence) or False
+        search_loc = {}
+        for rec in route_ids:
+            pull_id = rec.pull_ids.filtered(lambda l: l.action == 'move' and l.procure_method == 'make_to_stock')
+            if len(pull_id) != 1:
+                raise ValidationError('the routes of warehouse %s are badly configured' % warehouse_id.name)
+            search_loc[pull_id.location_src_id.id] = rec.id
 
         for item in vals:
             product = item[2]['product_id']
             qty = item[2]['product_uom_qty']
+            item[2]['route_id'] = False
             product_id = self.env['product.product'].browse(product)
-            automated_qty = product_id.get_quantity_warehouse(warehouse=automated_wh)
-            normal_qty = product_id.get_quantity_warehouse(warehouse=normal_wh)
 
-            item[2]['route_id'] = (automated_qty >= qty and automated_route) or (
-                        normal_qty >= qty and normal_route) or False
+            for loc, rte in search_loc.items():
+                loc_qty = product_id.get_quantity_location(location=loc)
+                print(loc_qty, qty)
+                if loc_qty >= qty:
+                    item[2]['route_id'] = rte
+                    break
+
         vals = [(0, 0, item[2]) for item in vals if item[2]['route_id']]
         return vals
 

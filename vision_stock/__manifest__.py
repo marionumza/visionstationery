@@ -23,6 +23,7 @@
              'views/warehouse.xml',
              'views/picking.xml',
              'views/stock_request.xml',
+             'views/stock_rule.xml',
              'wizard/similar_pick_wizard.xml'
     ],
 }

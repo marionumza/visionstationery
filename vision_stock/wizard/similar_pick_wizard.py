@@ -34,6 +34,11 @@ class SimilarPickWizard(models.TransientModel):
 
     @api.model
     def get_similar_vals(self, pick):
+        """
+        prepare the values for the creation of the lines for the wizard
+        :param pick:
+        :return:
+        """
         pick_id = self.env['stock.picking'].browse(pick)
         pick_list = pick_id.compute_list_similar()
         vals = [(0, 0, {'pick_id': i[0],
@@ -43,6 +48,10 @@ class SimilarPickWizard(models.TransientModel):
 
     @api.multi
     def action_get_similar(self):
+        """
+        triggered by a button, to refresh the list of similar picking
+        :return:
+        """
         vals = self.get_similar_vals(self.picking_id.id)
         self.update({'line_ids': vals})
         action = {'name': 'Request Stock with Auto Selection',
