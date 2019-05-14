@@ -14,5 +14,45 @@
             </data>
         </field>
     </record>
+    
+    
+    <record id="view_order_form_inherit_pricelist" model="ir.ui.view">
+	    <field name="name">sale.order.inherit.pricelist.form</field>
+	    <field name="model">sale.order</field>
+	    <field name="inherit_id" ref="sale.view_order_form"/>
+	    <field name="arch" type="xml">
+	    	<xpath expr="//field[@name='order_line']" position="attributes">
+	    		<attribute name="context">{'default_pricelist_id':pricelist_id}</attribute>
+	    	</xpath>
+	    	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='price_subtotal']" position="after">
+	    		<field name="pricelist_id" groups="product.group_sale_pricelist"/>
+	    	</xpath>
+	    	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="replace">
+		    	<field name="product_id"
+	                  context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+	                  attrs="{'readonly': [('product_updatable', '=', False)]}"
+	                  force_save="1"
+	                 />
+	        </xpath>
+	    	<xpath expr="//field[@name='order_line']/form/group/group/div/field[@name='product_uom_qty']" position="replace">
+				<field
+                    context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': parent.company_id}"
+                    name="product_uom_qty" class="oe_inline"/>    	
+	    	</xpath>
+	    	<xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="replace">
+	    		<field name="pricelist_id" groups="product.group_sale_pricelist"/>
+	    		<field name="product_uom_qty"  string="Ordered Qty"
+                        context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+                 />
+	    	</xpath>
+	    	<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="replace">
+	    		<field name="product_id"
+	                attrs="{'readonly': [('product_updatable', '=', False)]}"
+	                force_save="1"
+	                context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
+	               />
+	    	</xpath>
+	    </field>
+	 </record>
 
 </odoo>
