@@ -190,21 +190,15 @@ class SaleOrderLine(models.Model):
         for rec in self:
             rec.proposed_price_unit = rec.price_unit
 
+    @api.constrains('price_unit')
     def _check_price_within_allowed_range(self):
-        """
-        for a singleton, sale.order.line, check that the price unit is within the acceptable range
-        :return: True or False
-        """
-        self.ensure_one()
-        if not self.product_id:
-            return True
-        product_uom_id = self.product_id.uom_id
-        line_uom_id = self.product_uom
-        price_uom = self.proposed_price_unit
-        # if line_uom_id != product_uom_id:
-
-        if price_uom < self.product_id.min_price or price_uom > self.product_id.max_price:
-            return False
+        for rec in self:
+            if not rec.product_id:
+                continue
+            min_price = rec.product_id.min_price / rec.product_uom.factor
+            max_price = rec.product_id.max_price /rec.product_uom.factor
+            if rec.price_unit < min_price or rec.price_unit > max_price:
+                raise ValidationError('Unit Price for product %s is out of the allowed range' % rec.product_id.name)
         return True
 
     def _compute_blanket_qty(self):
