@@ -12,16 +12,16 @@ class ProductPricelist(models.Model):
                                        ('tender', 'Tender')], string='Type', default='public')
     partner_ids = fields.One2many('res.partner', 'property_product_pricelist', 'Customer')
 
-    @api.constrains('pricelist_type')
-    def _check_pricelist_rules(self):
-        to_do_ids = self.filtered(lambda r: r.pricelist_type == 'tender')
-        for rec in to_do_ids:
-            rule_ids = rec.item_ids
-            bad_ids = rule_ids.filtered(
-                lambda r: r.applied_on != '0_product_variant' or not r.uom_id or r.compute_price != 'fixed')
-
-            if len(bad_ids) > 0:
-                raise UserError('All rules in a tender pricelist must be assigned to a specific product with a fixed price')
+    # @api.constrains('pricelist_type')
+    # def _check_pricelist_rules(self):
+    #     to_do_ids = self.filtered(lambda r: r.pricelist_type == 'tender')
+    #     for rec in to_do_ids:
+    #         rule_ids = rec.item_ids
+    #         bad_ids = rule_ids.filtered(
+    #             lambda r: r.applied_on != '0_product_variant' or not r.uom_id or r.compute_price != 'fixed')
+    #
+    #         if len(bad_ids) > 0:
+    #             raise UserError('All rules in a tender pricelist must be assigned to a specific product with a fixed price')
 
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):

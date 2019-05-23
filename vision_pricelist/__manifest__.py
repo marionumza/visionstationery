@@ -24,7 +24,7 @@ Customised Pricelist for Vision Stationery
     """,
 
     'author': "Alitec Pte Ltd",
-    'depends': ['sale'
+    'depends': ['sale', 'vision_sale'
     ],
     'data': ['views/sale.xml',
              'views/pricelist.xml',

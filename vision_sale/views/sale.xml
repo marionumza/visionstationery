@@ -23,6 +23,7 @@
 
             <data>
                 <header position="inside">
+                    <button name="action_quotation" type="object" string="Quotation" attrs="{'invisible': [('state', '!=', 'new')]}"/>
                     <button name='action_approve' type="object" string='Approve' attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('team_id', 'in', [3,4])]}"/>
                     <button name='action_new_related_order' type="object" string='New order' attrs="{'invisible': [('blanket', '=', False)]}" class="btn_primary"/>
                 </header>
@@ -37,7 +38,7 @@
 
 
                 <field name='state' position='replace'>
-                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,sent,sale"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,draft,approved,sent,sale"/>
                 </field>
 
                 <div name='button_box' position='inside'>
@@ -58,6 +59,21 @@
                 <field name='team_id' position='replace'>
                     <field name='team_id' options="{'no_create': True}" class="oe_read_only"/>
                 </field>
+
+                <field name="confirmation_date" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state', 'in', ['new', 'draft', 'approved', 'sent', 'cancel'])]}</attribute>
+                </field>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="replace">
+                    <field name="proposed_price_unit" string='Proposed Price'
+                           attrs="{'column_invisible': [('parent.state', 'not in', ['new'])]}"/>
+                    <field name="final_price"/>
+                    <field name="price_unit" invisible="1" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                    <field name="line_ok"/>
+                </xpath>
 
             </data>
 

@@ -10,17 +10,34 @@ class SaleOrder(models.Model):
     name = fields.Char(string='Order Reference', required=True, copy=False, readonly=True,
                        states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('Draft'))
 
+    pricelist_id = fields.Many2one('product.pricelist', states={'new': [('readonly', False)],
+                                                                'draft': [('readonly', False)],
+                                                                'sent': [('readonly', False)]})
+
+    partner_id = fields.Many2one('res.partner', states={'draft': [('readonly', False)],
+                                                        'sent': [('readonly', False)],
+                                                        'new': [('readonly', False)]})
+
+    picking_policy = fields.Selection(states={'new': [('readonly', False)],
+                                              'draft': [('readonly', False)],
+                                              'sent': [('readonly', False)]})
+
+    warehouse_id = fields.Many2one('stock.warehouse', states={'new': [('readonly', False)],
+                                                              'draft': [('readonly', False)],
+                                                              'sent': [('readonly', False)]})
+
     quotation_no = fields.Char('Quotation No')
     blanket = fields.Boolean('Blanket Contract', default=False)
 
     state = fields.Selection([
+        ('new', 'New'),
         ('draft', 'Quotation'),
         ('approved', 'Approved'),
         ('sent', 'Quotation Sent'),
         ('sale', 'Sales Order'),
         ('done', 'Locked'),
         ('cancel', 'Cancelled'),
-    ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='draft')
+    ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='new')
 
     def _assign_name(self):
         self.ensure_one()
@@ -96,6 +113,26 @@ class SaleOrder(models.Model):
         return result
 
     @api.multi
+    def action_draft(self):
+        orders = self.filtered(lambda s: s.state in ['cancel', 'sent'])
+        return orders.write({
+            'state': 'new',
+        })
+
+    @api.multi
+    def action_quotation(self):
+        orders = self.filtered(lambda s: s.state == 'new')
+        line_ids = orders.mapped('order_line')
+        ok = all(line_ids.mapped('line_ok'))
+        if not ok:
+            raise ValidationError('Pricing Error - please verify the unchecked lines')
+
+        for l in line_ids:
+            l.write({'price_unit': l.proposed_price_unit})
+
+        return orders.write({'state': 'draft'})
+
+    @api.multi
     def action_approve(self):
         imd = self.env['ir.model.data']
         web_team = imd.xmlid_to_res_id('vision_sale.vision_web_team')
@@ -120,6 +157,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     state = fields.Selection([
+        ('new', 'New'),
         ('draft', 'Quotation'),
         ('approved', 'Approved'),
         ('sent', 'Quotation Sent'),
@@ -130,14 +168,43 @@ class SaleOrderLine(models.Model):
 
     price_unit = fields.Float('Unit Price', readonly=True, states={'draft': [('readonly', False)]})
     blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
+    line_ok = fields.Boolean('Checked', compute='_check_line', store=True)
+    proposed_price_unit = fields.Float('Proposed Price', help='Proposed price')
+    final_price = fields.Float('Price', compute='_check_line')
 
-    @api.constrains('price_unit')
-    def _check_price_within_allowed_range(self):
+    # The only purpose of the "final_price" is to allow the user to see the price_unit, without the possibility
+    # to modify it directly.
+    # - If price_unit is a readonly field, it is not possible to modify it, even from backend
+    # - the user enter a proposed_price, if the proposed price is accepted, then the proposed price becomes the
+    #   price_unit
+
+    @api.depends('price_unit')
+    def _check_line(self):
         for rec in self:
-            if not rec.product_id:
-                continue
-            if rec.price_unit < rec.product_id.min_price or rec.price_unit > rec.product_id.max_price:
-                raise ValidationError('Unit Price for product %s is out of the allowed range' % rec.product_id.name)
+            rec.line_ok = rec._check_price_within_allowed_range()
+            rec.final_price = rec.price_unit
+        return
+
+    @api.onchange('price_unit')
+    def update_proposed_price(self):
+        for rec in self:
+            rec.proposed_price_unit = rec.price_unit
+
+    def _check_price_within_allowed_range(self):
+        """
+        for a singleton, sale.order.line, check that the price unit is within the acceptable range
+        :return: True or False
+        """
+        self.ensure_one()
+        if not self.product_id:
+            return True
+        product_uom_id = self.product_id.uom_id
+        line_uom_id = self.product_uom
+        price_uom = self.proposed_price_unit
+        # if line_uom_id != product_uom_id:
+
+        if price_uom < self.product_id.min_price or price_uom > self.product_id.max_price:
+            return False
         return True
 
     def _compute_blanket_qty(self):
@@ -147,7 +214,7 @@ class SaleOrderLine(models.Model):
     @api.constrains('price_unit')
     def check_status_before_update_price(self):
         for rec in self:
-            if rec.state != 'draft':
+            if rec.state not in ['draft', 'new']:
                 raise ValidationError(_('You cannot modify the price for an approved order. Set it to draft first'))
 
     @api.onchange('product_uom', 'product_uom_qty')

@@ -9,7 +9,21 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=True, help="Pricelist for current sales order Line.")
-        
+
+    @api.depends('price_unit', 'proposed_price_unit')
+    def _check_line(self):
+        super(SaleOrderLine, self)._check_line()
+        for rec in self:
+            rec.line_ok = rec.line_ok and rec._check_price_with_pricelist()
+        return
+
+    def _check_price_with_pricelist(self):
+        self.ensure_one()
+        res = True
+        if self.pricelist_id and self.pricelist_id.pricelist_type == 'tender':
+            res = self.proposed_price_unit == self.price_unit
+        return res
+
     @api.multi
     def _get_display_price(self, product):
         # TO DO: move me in master/saas-16 on sale.order
@@ -26,7 +40,7 @@ class SaleOrderLine(models.Model):
             base_price = self.env['res.currency'].browse(currency_id).with_context(product_context).compute(base_price, pricelist_id.currency_id)
         # negative discounts (= surcharge) are included in the display price
         return max(base_price, final_price)
-    
+
     @api.multi
     @api.onchange('product_id', 'pricelist_id')
     def product_id_change(self):
