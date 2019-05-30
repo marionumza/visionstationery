@@ -43,7 +43,8 @@ class SimilarPickWizard(models.TransientModel):
         pick_list = pick_id.compute_list_similar()
         vals = [(0, 0, {'pick_id': i[0],
                         'nb_line': i[1],
-                        'nb_similar_line': i[2]}) for i in pick_list]
+                        'nb_similar_line': i[2],
+                        'similarity_rate': i[3]}) for i in pick_list]
         return vals
 
     @api.multi
@@ -78,8 +79,10 @@ class SimilarPickWizard(models.TransientModel):
 
 class SimilarPickLine(models.TransientModel):
     _name = 'similar.pick.line'
+    _order = 'similarity_rate desc, id'
 
     similar_id = fields.Many2one('similar.pick.wizard', string='Similar Wizard')
     pick_id = fields.Many2one('stock.picking', 'Picking')
     nb_line = fields.Integer('# lines')
-    nb_similar_line = fields.Integer('# Similar lines')
+    nb_similar_line = fields.Integer('# common products')
+    similarity_rate = fields.Float('Similarity rate')

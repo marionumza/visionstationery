@@ -23,10 +23,11 @@
                                 <button name="action_get_similar" string="Get" type="object" class="btn-primary"/>
                             </group>
                             <field name="line_ids">
-                                <tree create="false">
+                                <tree create="false" default_order="similarity_rate desc, pick_id">
                                     <field name="pick_id"/>
                                     <field name="nb_line"/>
                                     <field name="nb_similar_line"/>
+                                    <field name="similarity_rate"/>
                                 </tree>
                             </field>
                         </page>

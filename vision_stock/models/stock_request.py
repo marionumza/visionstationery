@@ -136,7 +136,6 @@ class StockRequestOrder(models.Model):
 
             for loc, rte in search_loc.items():
                 loc_qty = product_id.get_quantity_location(location=loc)
-                print(loc_qty, qty)
                 if loc_qty >= qty:
                     item[2]['route_id'] = rte
                     break

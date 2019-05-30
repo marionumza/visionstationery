@@ -2,8 +2,15 @@
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
+from operator import itemgetter
 import logging
 _logger = logging.getLogger(__name__)
+
+
+class StockPickingType(models.Model):
+    _inherit = 'stock.picking.type'
+
+    auto_stock_request = fields.Boolean('Auto Stock Request', default=False)
 
 
 class StockWarehouse(models.Model):
@@ -98,9 +105,66 @@ class StockPicking(models.Model):
     def compute_list_similar(self):
         """
         from a singleton, return a list of similar picking
-        :return: list of similar pickings [(id, nb_line, nb_similar_line)]
+        :return: list of similar pickings [(id, nb_line, nb_similar_line, similarity_rate)]
         """
+        self.ensure_one()
         domain = [('state', '=', 'confirmed'), ('picking_type_id', '=', self.picking_type_id.id)]
         pick_ids = self.env['stock.picking'].search(domain)
-        res = [(p.id, p.move_lines and len(p.move_lines) or 0, 0) for p in pick_ids]
+        pick_ids = pick_ids - self
+        product_list = self.move_lines.mapped('product_id')
+        res = []
+        for p in pick_ids:
+            ct = len([m.id for m in p.move_lines if p.product_id in product_list])
+            nb_line = p.move_lines and len(p.move_lines) or 0
+            elt = {'id': p.id,
+                   'nb_line': nb_line,
+                   'common_lines': ct,
+                   'similarity_rate': nb_line and ct/nb_line * 100 or 0}
+            res.append(elt)
+        sorted_res = sorted(res, key=itemgetter('id'))
+        sorted_res = sorted(sorted_res, key=itemgetter('similarity_rate'), reverse=True)
+        res = [(i['id'], i['nb_line'], i['common_lines'], i['similarity_rate']) for i in sorted_res]
+        # res = [(p.id, p.move_lines and len(p.move_lines) or 0, 0) for p in pick_ids]
         return res
+
+    @api.model
+    def select_reference_pick(self):
+        """
+        Returns a picking that will be used as a reference for the automatic stock request
+        :return:
+        """
+        auto_pick_ids = self.env['stock.picking.type'].search([('auto_stock_request', '=', True)])
+        if len(auto_pick_ids) == 0:
+            return
+        domain = [('state', '=', 'confirmed'), ('picking_type_id', 'in', auto_pick_ids.ids)]
+        pick_ids = self.env['stock.picking'].search(domain)
+        selected_pick_id = pick_ids.sorted(key=lambda r: r.name)[0]
+        return selected_pick_id
+
+    @api.model
+    def cron_generate_stock_request(self):
+        """
+        Select a reference picking
+        Find similar pickings
+        Generate a stock request for all of them
+
+        :return:
+        """
+        reference_pick_id = self.select_reference_pick()
+        if not reference_pick_id:
+            return
+
+        # Get the list of pickings from which to create a stock request
+        similar_lst = reference_pick_id.compute_list_similar()
+
+        get_param = self.env['ir.config_parameter'].sudo().get_param
+        nb_similar_line = int(get_param('default_nb_similar_line') or '3')
+
+        similar_lst = len(similar_lst) > nb_similar_line and similar_lst[:nb_similar_line] or similar_lst
+        pick_lst = [i[0] for i in similar_lst]
+        pick_lst.append(reference_pick_id.id)
+        pick_ids = self.env['stock.picking'].browse(pick_lst)
+
+        request_order = pick_ids.create_request_order()
+        return request_order
+
