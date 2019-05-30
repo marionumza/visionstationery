@@ -1,0 +1,17 @@
+<odoo>
+    <record id="update_urgency_on_picking_from_so" model="base.automation">
+        <field name="name">Update Urgency on DO from SO</field>
+        <field name="model_id" eval="ref('stock.model_stock_picking')"/>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="trigger">on_create_or_write</field>
+        <field name="code">
+for rec in records:
+    sale_id = rec.group_id and rec.group_id.sale_id or False
+    urgency = sale_id and sale_id.urgency or 'normal'
+    rec.write({'urgency': urgency})
+        </field>
+        <field name="filter_pre_domain">[('state','in',['draft'])]</field>
+    </record>
+
+</odoo>

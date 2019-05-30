@@ -17,12 +17,14 @@
     'version': '11.0.1',
     'author': "Alitec Pte Ltd",
     'depends': [
-        'sale', 'stock', 'sale_stock'
+        'sale', 'stock', 'sale_stock', 'base_automation'
     ],
     'data': ['data/crm.team.csv',
              'views/product.xml',
              'views/sale.xml',
              'views/blanket_sale.xml',
-             'views/menu.xml'
+             'views/stock.xml',
+             'views/menu.xml',
+             'data/automation.xml'
     ],
 }

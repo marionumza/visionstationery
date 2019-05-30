@@ -9,3 +9,35 @@ class ProductTemplate(models.Model):
 
     min_price = fields.Monetary('Min Sell Price')
     max_price = fields.Monetary('Max Sell Price')
+    reserved_qty = fields.Float('Reserved', compute='_compute_reserved_qty')
+
+    @api.multi
+    def _compute_reserved_qty(self):
+        for template in self:
+            variant_lst = template.product_variant_ids.mapped('reserved_qty')
+            qty = len(variant_lst) > 0 and sum(variant_lst) or 0.0
+            template.reserved_qty = qty
+
+
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    reserved_qty = fields.Float('Reserved', compute='_compute_reserved_qty')
+
+    @api.multi
+    def _compute_reserved_qty(self):
+        order_id = self.env['sale.order'].search([('unreserved', '=', False)])
+        line_id = order_id.mapped('order_line')
+
+        data = {}
+        for i in line_id:
+            prod = i.product_id.id
+            if i.product_id.id in data:
+                data[prod] += i.product_uom._compute_quantity(i.product_uom_qty, i.product_id.uom_id)
+            else:
+                data[prod] = i.product_uom._compute_quantity(i.product_uom_qty, i.product_id.uom_id)
+
+        for product in self:
+            product.reserved_qty = product.id in data and data[product.id] or 0.0
+        return
+

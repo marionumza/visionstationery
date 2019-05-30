@@ -28,6 +28,11 @@ class SaleOrder(models.Model):
 
     quotation_no = fields.Char('Quotation No')
     blanket = fields.Boolean('Blanket Contract', default=False)
+    urgency = fields.Selection([('normal', 'Normal'),
+                                ('urgent', 'Urgent'),
+                                ('very_urgent', 'Very Urgent')], string='Urgency', default='normal', readonly=True,
+                               states={'new': [('readonly', False)], 'draft': [('readonly', False)]})
+    unreserved = fields.Boolean('Unreserved', default=True)
 
     state = fields.Selection([
         ('new', 'New'),
@@ -51,6 +56,13 @@ class SaleOrder(models.Model):
             return self.name
 
     @api.multi
+    def toggle_reservation(self):
+        self.ensure_one()
+        if not self.env.user.has_group('base.group_system'):
+            raise ValidationError('You are not authorised to change the reservation')
+        self.unreserved = not self.unreserved
+
+    @api.multi
     def action_confirm(self):
         res = True
         for rec in self:
@@ -63,7 +75,14 @@ class SaleOrder(models.Model):
                 res = super(SaleOrder, self).action_confirm()
 
             vals['name'] = rec._assign_name()
+            vals['unreserved'] = True
             rec.write(vals)
+        return res
+
+    @api.multi
+    def action_cancel(self):
+        res = super(SaleOrder, self).action_cancel()
+        self.write({'unreserved': True})
         return res
 
     @api.multi
@@ -170,7 +189,7 @@ class SaleOrderLine(models.Model):
     blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
     line_ok = fields.Boolean('Checked', compute='_check_line', store=True)
     proposed_price_unit = fields.Float('Proposed Price', help='Proposed price')
-    final_price = fields.Float('Price', compute='_check_line')
+    final_price = fields.Float('RSP', compute='_check_line', help='Recommended Sell Price')
 
     # The only purpose of the "final_price" is to allow the user to see the price_unit, without the possibility
     # to modify it directly.
@@ -190,15 +209,16 @@ class SaleOrderLine(models.Model):
         for rec in self:
             rec.proposed_price_unit = rec.price_unit
 
-    @api.constrains('price_unit')
+    # @api.constrains('price_unit')
     def _check_price_within_allowed_range(self):
         for rec in self:
             if not rec.product_id:
                 continue
-            min_price = rec.product_id.min_price / rec.product_uom.factor
-            max_price = rec.product_id.max_price /rec.product_uom.factor
-            if rec.price_unit < min_price or rec.price_unit > max_price:
-                raise ValidationError('Unit Price for product %s is out of the allowed range' % rec.product_id.name)
+            min_price = rec.product_id.uom_id._compute_price(rec.product_id.min_price, rec.product_uom)
+            max_price = rec.product_id.uom_id._compute_price(rec.product_id.max_price, rec.product_uom)
+            if rec.proposed_price_unit < min_price or rec.proposed_price_unit > max_price:
+                # raise ValidationError('Unit Price for product %s is out of the allowed range' % rec.product_id.name)
+                return False
         return True
 
     def _compute_blanket_qty(self):

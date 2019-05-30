@@ -1,0 +1,29 @@
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">vision.pick.urgency.form</field>
+        <field name="model">stock.picking</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="origin" position="after">
+                    <field name="urgency"/>
+                </field>
+            </data>
+        </field>
+    </record>
+
+    <record id="vpicktree_urgency_tree" model="ir.ui.view">
+        <field name="name">vision.pick.urgency.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="type">tree</field>
+        <field name="inherit_id" ref="stock.vpicktree"/>
+        <field name="arch" type="xml">
+            <data>
+                <field name="origin" position="before">
+                    <field name="urgency"/>
+                </field>
+            </data>
+        </field>
+    </record>
+</odoo>
