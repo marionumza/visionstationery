@@ -68,20 +68,35 @@ class ProductPricelist(models.Model):
             prod_tmpl_ids = [product.product_tmpl_id.id for product in products]
 
         # Load all rules
-        self._cr.execute(
-            'SELECT item.id '
-            'FROM product_pricelist_item AS item '
-            'LEFT JOIN product_category AS categ '
-            'ON item.categ_id = categ.id '
-            'WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = any(%s))'
-            'AND (item.product_id IS NULL OR item.product_id = any(%s))'
-            'AND (item.categ_id IS NULL OR item.categ_id = any(%s)) '
-            'AND (item.pricelist_id = %s) '
-            'AND (item.date_start IS NULL OR item.date_start<=%s) '
-            'AND (item.date_end IS NULL OR item.date_end>=%s)'
-            'AND (item.uom_id IS NULL OR item.uom_id = %s ) '
-            'ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc',
-            (prod_tmpl_ids, prod_ids, categ_ids, self.id, date, date, uom_id))
+        if not uom_id:
+            self._cr.execute(
+                'SELECT item.id '
+                'FROM product_pricelist_item AS item '
+                'LEFT JOIN product_category AS categ '
+                'ON item.categ_id = categ.id '
+                'WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = any(%s))'
+                'AND (item.product_id IS NULL OR item.product_id = any(%s))'
+                'AND (item.categ_id IS NULL OR item.categ_id = any(%s)) '
+                'AND (item.pricelist_id = %s) '
+                'AND (item.date_start IS NULL OR item.date_start<=%s) '
+                'AND (item.date_end IS NULL OR item.date_end>=%s)'
+                'ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc',
+                (prod_tmpl_ids, prod_ids, categ_ids, self.id, date, date))
+        else:
+            self._cr.execute(
+                'SELECT item.id '
+                'FROM product_pricelist_item AS item '
+                'LEFT JOIN product_category AS categ '
+                'ON item.categ_id = categ.id '
+                'WHERE (item.product_tmpl_id IS NULL OR item.product_tmpl_id = any(%s))'
+                'AND (item.product_id IS NULL OR item.product_id = any(%s))'
+                'AND (item.categ_id IS NULL OR item.categ_id = any(%s)) '
+                'AND (item.pricelist_id = %s) '
+                'AND (item.date_start IS NULL OR item.date_start<=%s) '
+                'AND (item.date_end IS NULL OR item.date_end>=%s)'
+                'AND (item.uom_id IS NULL OR item.uom_id = %s ) '
+                'ORDER BY item.applied_on, item.min_quantity desc, categ.parent_left desc',
+                (prod_tmpl_ids, prod_ids, categ_ids, self.id, date, date, uom_id))
 
         item_ids = [x[0] for x in self._cr.fetchall()]
         items = self.env['product.pricelist.item'].browse(item_ids)

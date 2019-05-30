@@ -9,7 +9,58 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     
     pricelist_id = fields.Many2one('product.pricelist', string='Pricelist', required=True, help="Pricelist for current sales order Line.")
-
+    filter_all_product = fields.Boolean("Filter All Product", default =True)
+    filter_pricelist_product = fields.Boolean("Filter Pricelist Product", default=False)
+    
+    @api.onchange('filter_all_product')
+    def onchange_filter_all_product(self):
+        if self.filter_all_product:
+            return {'domain':{'product_id':[]}}
+        if not self.filter_all_product:
+            pricelist_item_obj = self.env['product.pricelist.item']
+            product_obj = self.env['product.product']
+            if self.pricelist_id:
+                product_lst_ids = []
+                pricilist_template_ids = self.pricelist_id.item_ids.search([('applied_on','=','1_product'),('pricelist_id','=',self.pricelist_id.id)])
+                if pricilist_template_ids:
+                    product_variant_ids = product_obj.search([('product_tmpl_id', 'in', pricilist_template_ids.mapped('product_tmpl_id.id'))])
+                    product_lst_ids.extend(product_variant_ids.mapped('id'))
+                pricilist_product_ids = self.pricelist_id.item_ids.search([('applied_on','=','0_product_variant'),('pricelist_id','=',self.pricelist_id.id)])
+                if pricilist_product_ids:
+                    product_lst_ids.extend(pricilist_product_ids.mapped('product_id.id'))
+                return {'domain':{'product_id':[('id','in',product_lst_ids)]}}
+            
+             
+    @api.onchange('filter_pricelist_product')
+    def onchange_filter_pricelist_product(self):
+        pricelist_item_obj = self.env['product.pricelist.item']
+        product_obj = self.env['product.product']
+        if self.filter_pricelist_product and self.pricelist_id:
+            product_lst_ids = []
+            pricilist_template_ids = self.pricelist_id.item_ids.search([('applied_on','=','1_product'),('pricelist_id','=',self.pricelist_id.id)])
+            if pricilist_template_ids:
+                product_variant_ids = product_obj.search([('product_tmpl_id', 'in', pricilist_template_ids.mapped('product_tmpl_id.id'))])
+                product_lst_ids.extend(product_variant_ids.mapped('id'))
+            pricilist_product_ids = self.pricelist_id.item_ids.search([('applied_on','=','0_product_variant'),('pricelist_id','=',self.pricelist_id.id)])
+            if pricilist_product_ids:
+                product_lst_ids.extend(pricilist_product_ids.mapped('product_id.id'))
+            return {'domain':{'product_id':[('id','in',product_lst_ids)]}}
+        
+    
+    @api.constrains('filter_all_product')
+    def _check_filter_all_product(self):
+        for rec in self:
+            if not rec.filter_all_product:
+                rec.filter_all_product = True
+                
+    @api.multi
+    def do_filter_all_product(self):
+        return True
+    
+    @api.multi
+    def do_filter_pricelist_product(self):
+        return True
+    
     @api.depends('price_unit', 'proposed_price_unit')
     def _check_line(self):
         super(SaleOrderLine, self)._check_line()
