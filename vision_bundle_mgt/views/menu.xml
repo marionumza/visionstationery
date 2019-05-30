@@ -1,0 +1,40 @@
+<odoo>
+
+    <menuitem id="mrp.menu_mrp_root"
+        name="Bundling"
+        groups="mrp.group_mrp_user,mrp.group_mrp_manager"
+        icon="fa-wrench"
+        web_icon="mrp,static/description/icon.png"
+        sequence="35"/>
+
+    <menuitem id="mrp.menu_mrp_production_report"
+      name="Bundling Orders"
+      parent="mrp.menu_mrp_reporting"
+      action="mrp.mrp_production_report"
+      sequence="11"/>
+
+    <record id="mrp.mrp_production_report" model="ir.actions.act_window">
+        <field name="name">Bundling Orders</field>
+    </record>
+
+    <menuitem action="mrp.mrp_production_action"
+            id="mrp.menu_mrp_production_action"
+            name="Bundling Orders"
+            parent="mrp.menu_mrp_manufacturing"
+            sequence="1"/>
+
+    <record id="mrp.mrp_production_action" model="ir.actions.act_window">
+        <field name="name">Bundling Orders</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click here to create a Manufacturing/Bundling Order.
+          </p><p>
+            Based on a Bill of Material, a Manufacturing/Bundling Order will consume raw materials
+            and produce finished products.
+          </p><p>
+            Manufacturing/Bundling Orders can be generated automatically based on customer
+            requirements or reordering rules.
+          </p>
+        </field>
+    </record>
+</odoo>
