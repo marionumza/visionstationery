@@ -14,11 +14,11 @@
     'name': "Vision Pricelist",
     'summary': """Pricelist Rules""",
     'category': 'Sale',
-    'version': '11.0.02',
+    'version': '11.0.03',
         'description': """
 Customised Pricelist for Vision Stationery
 ===========================================
-    - last update: 14-MAY-2019
+    - last update: 09-Jun-2019
     
         
     """,
@@ -28,5 +28,7 @@ Customised Pricelist for Vision Stationery
     ],
     'data': ['views/sale.xml',
              'views/pricelist.xml',
+             'wizard/assign_pricelist_partner.xml',
+             'wizard/remove_pricelist_partner.xml'
     ],
 }

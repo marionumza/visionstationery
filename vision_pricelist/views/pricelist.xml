@@ -24,8 +24,21 @@
         <field name="arch" type="xml">
             <data>
 
+                <sheet position="before">
+                    <header>
+                        <button name="action_assign_partner" string="Assign Customer" type="object"
+                                class="btn btn-primary"
+                                attrs="{'invisible': [('assign_button_visible','=',False)]}"/>
+                        <button name="action_remove_partner" string="Re-assign ALL Customer(s)" type="object"
+                                class="btn btn-primary"
+                                attrs="{'invisible': [('remove_button_visible', '=', False)]}"/>
+                    </header>
+                </sheet>
+
                 <field name="country_group_ids" position="replace">
                     <field name="pricelist_type" widget="radio"/>
+                    <field name="assign_button_visible" invisible="1"/>
+                    <field name="remove_button_visible" invisible="1"/>
                 </field>
 
                 <xpath expr="//div[@groups='product.group_pricelist_item']" position="replace">
@@ -51,7 +64,7 @@
                         </page>
                         <page name="info" string="Information" attrs="{'invisible': [('pricelist_type', '=', 'public')]}">
                             <field name="partner_ids">
-                                <tree create="false">
+                                <tree create="false" delete="false">
                                     <field name="name"/>
                                     <field name="email"/>
                                 </tree>
