@@ -194,7 +194,8 @@ class SaleOrderLine(models.Model):
         ('cancel', 'Cancelled'),
     ], related='order_id.state', string='Order Status', readonly=True, copy=False, store=True, default='draft')
 
-    price_unit = fields.Float('Unit Price', readonly=True, states={'draft': [('readonly', False)]})
+    price_unit = fields.Float('Unit Price', readonly=True,
+                              states={'draft': [('readonly', False)], 'new': [('readonly', False)]})
     blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
     line_ok = fields.Boolean('Checked', compute='_check_line', store=True)
     proposed_price_unit = fields.Float('Proposed Price', help='Proposed price')

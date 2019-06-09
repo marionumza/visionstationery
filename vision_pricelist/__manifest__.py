@@ -14,7 +14,7 @@
     'name': "Vision Pricelist",
     'summary': """Pricelist Rules""",
     'category': 'Sale',
-    'version': '11.0.1',
+    'version': '11.0.02',
         'description': """
 Customised Pricelist for Vision Stationery
 ===========================================

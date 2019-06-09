@@ -19,7 +19,6 @@
 
 	    	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="replace">
 	    		<field name="filter_all_product" string="All Products"/>
-	    		<field name="filter_pricelist_product" invisible="1"/>
 		    	<field name="product_id"
 	                  context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
 	                  attrs="{'readonly': [('product_updatable', '=', False)]}"
@@ -42,7 +41,6 @@
 
 			<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="replace">
 	    		<field name="filter_all_product" string="All"/>
-	    		<field name="filter_pricelist_product" invisible="1"/>
 	    		<field name="product_id"
 	                attrs="{'readonly': [('product_updatable', '=', False)]}"
 	                force_save="1"
