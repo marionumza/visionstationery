@@ -40,12 +40,12 @@
 	    	</xpath>
 
 			<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="replace">
-	    		<field name="filter_all_product" string="All"/>
 	    		<field name="product_id"
 	                attrs="{'readonly': [('product_updatable', '=', False)]}"
 	                force_save="1"
 	                context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
 	               />
+				<field name="filter_all_product" string="All"/>
 	    	</xpath>
 
 	    </field>
