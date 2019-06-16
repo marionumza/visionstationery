@@ -1,0 +1,20 @@
+Version Info
+
+
+11.0.3.5:-
+menu is not right for import coa 2 menu is dispaly invoicing and accounting 
+
+Date:- 20/05/2019
+version :- 11.0.3.8
+improvement:-
+1)improve import bom feature which we recently done.
+2)add picking with or without lot number feature on picking import.
+3)import product with attribute
+4) improve index
+
+Date:-28/05/2019
+version :-11.0.3.9
+issue solve:-
+1 ) Check for Can Be Sold and Can Be Purchase values.
+2) Add On Hand Quantity Values while import product.
+3) Pass wrong invoice policy value while import variant.

@@ -18,10 +18,7 @@
 	    	</xpath>
 
 	    	<xpath expr="//field[@name='order_line']/form/group/group/field[@name='product_id']" position="replace">
-<!-- 	    		<button name="do_filter_all_product" string="Filter All Product" type="object"/> -->
-	    		<field name="filter_all_product"/>
-<!-- 	    		<button name="do_filter_pricelist_product" string="Filter Pricelist Product" type="object"/> -->
-	    		<field name="filter_pricelist_product" invisible="1"/>
+	    		<field name="filter_all_product" string="All Products"/>
 		    	<field name="product_id"
 	                  context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
 	                  attrs="{'readonly': [('product_updatable', '=', False)]}"
@@ -43,15 +40,12 @@
 	    	</xpath>
 
 			<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="replace">
-<!-- 	    		<button name="do_filter_all_product" string="Filter All Product" type="object"/> -->
-	    		<field name="filter_all_product"/>
-<!-- 	    		<button name="do_filter_pricelist_product" string="Filter Pricelist Product" type="object"/> -->
-	    		<field name="filter_pricelist_product" invisible="1"/>
 	    		<field name="product_id"
 	                attrs="{'readonly': [('product_updatable', '=', False)]}"
 	                force_save="1"
 	                context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}"
 	               />
+				<field name="filter_all_product" string="All"/>
 	    	</xpath>
 
 	    </field>

@@ -11,6 +11,11 @@ class ProductTemplate(models.Model):
     max_price = fields.Monetary('Max Sell Price')
     reserved_qty = fields.Float('Reserved', compute='_compute_reserved_qty')
 
+    @api.onchange('list_price')
+    def update_max_price(self):
+        self.ensure_one()
+        self.max_price = max(self.max_price, self.list_price)
+
     @api.multi
     def _compute_reserved_qty(self):
         for template in self:

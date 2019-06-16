@@ -7,9 +7,6 @@ from odoo.exceptions import ValidationError
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    name = fields.Char(string='Order Reference', required=True, copy=False, readonly=True,
-                       states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('Draft'))
-
     pricelist_id = fields.Many2one('product.pricelist', states={'new': [('readonly', False)],
                                                                 'draft': [('readonly', False)],
                                                                 'sent': [('readonly', False)]})
@@ -44,9 +41,15 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', readonly=True, copy=False, index=True, track_visibility='onchange', default='new')
 
+    @api.model
+    def create(self, vals):
+        if not vals.get('name', False):
+            vals['name'] = 'New Quote'
+        return super(SaleOrder, self).create(vals)
+
     def _assign_name(self):
         self.ensure_one()
-        if self.name == _('Draft'):
+        if self.name == _('New Quote'):
             if self.company_id:
                 return self.env['ir.sequence'].with_context(force_company=self.company_id.id).next_by_code(
                     'sale.order') or _('Draft')
@@ -171,6 +174,12 @@ class SaleOrder(models.Model):
             vals['name'] = rec._assign_name()
             rec.write(vals)
 
+    @api.multi
+    def unlink(self):
+        order_to_change = self.filtered(lambda r: r.state == 'new')
+        order_to_change.write({'state': 'cancel'})
+        return super(SaleOrder, self).unlink()
+
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
@@ -185,7 +194,8 @@ class SaleOrderLine(models.Model):
         ('cancel', 'Cancelled'),
     ], related='order_id.state', string='Order Status', readonly=True, copy=False, store=True, default='draft')
 
-    price_unit = fields.Float('Unit Price', readonly=True, states={'draft': [('readonly', False)]})
+    price_unit = fields.Float('Unit Price', readonly=True,
+                              states={'draft': [('readonly', False)], 'new': [('readonly', False)]})
     blanket_delivered_qty = fields.Float('Bkt Delivered Qty', compute='_compute_blanket_qty')
     line_ok = fields.Boolean('Checked', compute='_check_line', store=True)
     proposed_price_unit = fields.Float('Proposed Price', help='Proposed price')

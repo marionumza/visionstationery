@@ -102,10 +102,10 @@ class StockPicking(models.Model):
 
         return action
 
-    def compute_list_similar(self):
+    def compute_list_similar(self, nb=None):
         """
         from a singleton, return a list of similar picking
-        :return: list of similar pickings [(id, nb_line, nb_similar_line, similarity_rate)]
+        :return: list of similar pickings [(id, nb_line, nb_similar_line, similarity_rate, urgency)]
         """
         self.ensure_one()
         domain = [('state', '=', 'confirmed'), ('picking_type_id', '=', self.picking_type_id.id)]
@@ -114,17 +114,56 @@ class StockPicking(models.Model):
         product_list = self.move_lines.mapped('product_id')
         res = []
         for p in pick_ids:
-            ct = len([m.id for m in p.move_lines if p.product_id in product_list])
+            shared_line = [m.id for m in p.move_lines if m.product_id in product_list]
+            ct = len(shared_line)
             nb_line = p.move_lines and len(p.move_lines) or 0
-            elt = {'id': p.id,
+            elt = {'pick_id': p.id,
                    'nb_line': nb_line,
                    'common_lines': ct,
-                   'similarity_rate': nb_line and ct/nb_line * 100 or 0}
+                   'similarity_rate': nb_line and ct/nb_line * 100 or 0,
+                   'urgency': p.urgency}
             res.append(elt)
-        sorted_res = sorted(res, key=itemgetter('id'))
+
+        sorted_res = self.compute_priority(res=res)
+        sorted_res = self.select_pickings(res=sorted_res, nb=nb)
+        return sorted_res
+
+    @api.model
+    def compute_priority(self, res=None):
+        """
+        from a list of dictionary [{'pick_id': xxx, 'nb_line': xxx, 'common_lines': xxx, 'similarity_rate': xxx, 'urgency': xxx}]
+        return the same list, but sorted
+        :param res:
+        :return: sorted res
+        """
+        if not res:
+            return res
+
+        sorted_res = sorted(res, key=itemgetter('pick_id'))
+        sorted_res = sorted(sorted_res, key=itemgetter('urgency'), reverse=True)
         sorted_res = sorted(sorted_res, key=itemgetter('similarity_rate'), reverse=True)
-        res = [(i['id'], i['nb_line'], i['common_lines'], i['similarity_rate']) for i in sorted_res]
-        # res = [(p.id, p.move_lines and len(p.move_lines) or 0, 0) for p in pick_ids]
+        return sorted_res
+
+    @api.model
+    def select_pickings(self, res=None, nb=None):
+        """
+        select the first nb record in the list. If nb is none, get the default qty from the configuration
+        :param res: [{'id': xxx, 'nb_line': xxx, 'common_lines': xxx, 'similarity_rate': xxx, 'urgency': xxx}]
+        :param nb:
+        :return: [{'id': xxx, 'nb_line': xxx, 'common_lines': xxx, 'similarity_rate': xxx, 'urgency': xxx, 'selected': Boolean}]
+        """
+        if not res:
+            return res
+        if not nb:
+            get_param = self.env['ir.config_parameter'].sudo().get_param
+            nb = int(get_param('default_nb_similar_line') or '0')
+
+        for r in res:
+            r['selected']: False
+
+        for n in range(min([nb, len(res)])):
+            res[n]['selected'] = True
+
         return res
 
     @api.model

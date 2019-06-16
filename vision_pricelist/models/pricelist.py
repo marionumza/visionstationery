@@ -11,6 +11,8 @@ class ProductPricelist(models.Model):
     pricelist_type = fields.Selection([('public', 'Public'),
                                        ('tender', 'Tender')], string='Type', default='public')
     partner_ids = fields.One2many('res.partner', 'property_product_pricelist', 'Customer')
+    assign_button_visible = fields.Boolean('Assign partner button visible', compute='_compute_button_visible')
+    remove_button_visible = fields.Boolean('Remove button visible', compute='_compute_remove_button_visible')
 
     # @api.constrains('pricelist_type')
     # def _check_pricelist_rules(self):
@@ -22,6 +24,49 @@ class ProductPricelist(models.Model):
     #
     #         if len(bad_ids) > 0:
     #             raise UserError('All rules in a tender pricelist must be assigned to a specific product with a fixed price')
+
+    @api.depends('partner_ids')
+    def _compute_remove_button_visible(self):
+        for rec in self:
+            rec.remove_button_visible = len(rec.partner_ids) > 0
+
+    @api.depends('pricelist_type', 'partner_ids')
+    def _compute_button_visible(self):
+        for rec in self:
+            rec.assign_button_visible = rec.pricelist_type == 'tender' and len(rec.partner_ids) == 0
+
+    @api.multi
+    def action_assign_partner(self):
+        self.ensure_one()
+        action = {
+            "name": "Assign a Customer",
+            "type": "ir.actions.act_window",
+            "res_model": "assign.pricelist.partner",
+            "views": [[False, "form"]],
+            "context": {'default_pricelist_id': self.id},
+            "target": 'new',
+        }
+        return action
+
+    @api.multi
+    def action_remove_partner(self):
+        self.ensure_one()
+        action = {
+            "name": "Re-Assign Customer(s)",
+            "type": "ir.actions.act_window",
+            "res_model": "remove.pricelist.partner",
+            "views": [[False, "form"]],
+            "context": {'default_pricelist_id': self.id},
+            "target": 'new',
+        }
+        return action
+
+    @api.multi
+    def assign_partner(self, partner_id):
+        self.ensure_one()
+        if not partner_id:
+            return
+        partner_id.write({'property_product_pricelist': self.id})
 
     @api.multi
     def _compute_price_rule(self, products_qty_partner, date=False, uom_id=False):
