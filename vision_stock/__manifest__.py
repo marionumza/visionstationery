@@ -17,7 +17,7 @@
     'version': '11.0.1',
     'author': "Alitec Pte Ltd",
     'depends': [
-        'sale', 'stock', 'stock_request'
+        'sale', 'stock', 'stock_request', 'vision_sale'
     ],
     'data': ['data/server_action.xml',
              'views/warehouse.xml',

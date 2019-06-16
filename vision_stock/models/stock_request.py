@@ -143,3 +143,7 @@ class StockRequestOrder(models.Model):
         vals = [(0, 0, item[2]) for item in vals if item[2]['route_id']]
         return vals
 
+    @api.multi
+    def unlink(self):
+        self.stock_request_ids.unlink()
+        return super().unlink()

@@ -40,11 +40,8 @@ class SimilarPickWizard(models.TransientModel):
         :return:
         """
         pick_id = self.env['stock.picking'].browse(pick)
-        pick_list = pick_id.compute_list_similar()
-        vals = [(0, 0, {'pick_id': i[0],
-                        'nb_line': i[1],
-                        'nb_similar_line': i[2],
-                        'similarity_rate': i[3]}) for i in pick_list]
+        pick_list = pick_id.compute_list_similar(nb=self.number_similar_pick)
+        vals = [(0, 0, val) for val in pick_list]
         return vals
 
     @api.multi
@@ -66,8 +63,30 @@ class SimilarPickWizard(models.TransientModel):
         return action
 
     @api.multi
+    def action_clear(self):
+        """
+        remove all the lines
+        :return:
+        """
+        self.ensure_one()
+        self.line_ids.unlink()
+
+        action = {'name': 'Request Stock with Auto Selection',
+                  'type': "ir.actions.act_window",
+                  'views': [[False, 'form']],
+                  'target': 'new',
+                  'res_model': 'similar.pick.wizard',
+                  'res_id': self.id
+                  }
+        return action
+
+    @api.multi
     def action_request(self):
-        pick_ids = self.line_ids.mapped('pick_id')
+        selected_ids = self.line_ids.filtered(lambda r: r.selected)
+        if not selected_ids:
+            print('zob')
+            return
+        pick_ids = selected_ids.mapped('pick_id')
         request_order = pick_ids.create_request_order()
         action = {'name': 'Stock Request Order',
                   'type': "ir.actions.act_window",
@@ -79,10 +98,13 @@ class SimilarPickWizard(models.TransientModel):
 
 class SimilarPickLine(models.TransientModel):
     _name = 'similar.pick.line'
-    _order = 'similarity_rate desc, id'
 
     similar_id = fields.Many2one('similar.pick.wizard', string='Similar Wizard')
     pick_id = fields.Many2one('stock.picking', 'Picking')
     nb_line = fields.Integer('# lines')
     nb_similar_line = fields.Integer('# common products')
     similarity_rate = fields.Float('Similarity rate')
+    urgency = fields.Selection([('normal', 'Normal'),
+                                ('urgent', 'Urgent'),
+                                ('very_urgent', 'Very Urgent')], string='Urgency', default='normal')
+    selected = fields.Boolean('Selected', default=False)

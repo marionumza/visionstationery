@@ -19,15 +19,21 @@
 
                     <notebook>
                         <page string="Similar Picking">
-                            <group>
-                                <button name="action_get_similar" string="Get" type="object" class="btn-primary"/>
-                            </group>
+
+                            <div>
+                                <button name="action_get_similar" string="GET" type="object" class="btn btn-primary"
+                                        style="margin: 5px 10px 5px 0px;"/>
+                                <button name="action_clear" string="CLEAR" type="object"/>
+                            </div>
+
                             <field name="line_ids">
-                                <tree create="false" default_order="similarity_rate desc, pick_id">
+                                <tree create="false" editable="below">
+                                    <field name="selected" string="Select"/>
                                     <field name="pick_id"/>
                                     <field name="nb_line"/>
                                     <field name="nb_similar_line"/>
                                     <field name="similarity_rate"/>
+                                    <field name="urgency"/>
                                 </tree>
                             </field>
                         </page>
