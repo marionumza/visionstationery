@@ -1,0 +1,5 @@
+NAME,CUSTOMER,SOURCE DOCUMENT,DATE,PRODUCT,QUANTITY,LOT
+WH/IN/99,Azure Interior,test,2017-05-09,Apple In-Ear Headphones,15,1000003
+WH/IN/99,Azure Interior,DEMO,2017-06-12,Apple Wireless Keyboard,20,1000004
+WH/IN/98,Gemini Furniture,abc,2017-05-06,Bose Mini Bluetooth Speaker,22,
+WH/IN/97,Azure Interior,mno,2017-05-07,Graphics Card,25,1000005
