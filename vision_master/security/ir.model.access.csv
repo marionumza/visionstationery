@@ -1,0 +1,2 @@
+id,name,model_id/id,group_id/id,perm_create,perm_read,perm_write,perm_unlink
+access_portal_product_map_admin,portal_product_map_admin,vision_master.model_portal_product_map,base.group_system,True,True,True,True

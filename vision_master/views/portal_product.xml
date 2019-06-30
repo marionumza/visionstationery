@@ -1,0 +1,46 @@
+<odoo>
+
+    <record id="portal_product_tree" model="ir.ui.view">
+        <field name="name">Portal Product Map Tree</field>
+        <field name="model">portal.product.map</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="product_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="portal_product_filter" model="ir.ui.view">
+        <field name="name">Portal Product Map Search</field>
+        <field name="model">portal.product.map</field>
+        <field name="arch" type="xml">
+            <search string="Search Mapping Portal Product">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="description"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_portal" string="Portal" context="{'group_by':'name'}"/>
+                    <filter name="group_by_product" string="Product" context="{'group_by':'product_id'}"/>
+                </group>
+           </search>
+        </field>
+    </record>
+
+    <record id="action_portal_product" model="ir.actions.act_window">
+        <field name="name">Mapping Product - Portal</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">portal.product.map</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem action="action_portal_product"
+              id="menu_portal_product"
+              parent="sale.product_menu_catalog"
+              sequence="20"/>
+
+</odoo>
