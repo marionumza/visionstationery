@@ -13,7 +13,7 @@
 
     'name': "Vision Bundle",
     'summary': """Management of Bundles for Vision Stationery""",
-    'category': 'Sale',
+    'category': 'Vision',
     'version': '11.0.1',
     'author': "Alitec Pte Ltd",
     'depends': [

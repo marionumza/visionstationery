@@ -13,7 +13,7 @@
 
     'name': "Vision Stock",
     'summary': """Customised Stock for Vision Stationery""",
-    'category': 'Stock',
+    'category': 'Vision',
     'version': '11.0.2',
     'author': "Alitec Pte Ltd",
     'depends': [

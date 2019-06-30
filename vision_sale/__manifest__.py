@@ -13,7 +13,7 @@
 
     'name': "Vision Sales",
     'summary': """Customised Sales for Vision Stationery""",
-    'category': 'Sale',
+    'category': 'Vision',
     'version': '11.0.1.1',
     'author': "Alitec Pte Ltd",
     'depends': [

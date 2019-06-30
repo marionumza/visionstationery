@@ -14,6 +14,7 @@
     'name': "Vision Test Data",
     'summary': """Test for Vision Stationery""",
     'version': '11.0.1',
+    'category': 'Vision',
     'author': "Alitec Pte Ltd",
     'depends': [
         'sale', 'stock'

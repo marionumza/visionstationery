@@ -13,7 +13,7 @@
 
     'name': "Vision Pricelist",
     'summary': """Pricelist Rules""",
-    'category': 'Sale',
+    'category': 'Vision',
     'version': '11.0.03',
         'description': """
 Customised Pricelist for Vision Stationery
