@@ -16,7 +16,7 @@
 	'author': 'BrowseInfo',	
 	'website': 'http://www.browseinfo.in',
 	'category': 'Accounting',
-	'version': '11.0.0.2',
+	'version': '11.0.0.2.1',
 	'depends': ['base','account_invoicing'],	
 	'data': [
 		'security/ir.model.access.csv',

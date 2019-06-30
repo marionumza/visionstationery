@@ -76,7 +76,7 @@ class account_invoice(models.Model):
 
     custom_seq = fields.Boolean('Custom Sequence')
     system_seq = fields.Boolean('System Sequence')
-    invoice_name = fields.Char('Invocie Name')
+    invoice_name = fields.Char('Invoice Name')
 
 
 class gen_inv(models.TransientModel):

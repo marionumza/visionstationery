@@ -3,7 +3,7 @@
 
 {
     'name': 'Odoo all import for Sales, Purchase, Invoice, Inventory,BOM, Pricelist, Payment, Bank Statement, Journal Entry, Picking, Product, Customer.',
-    'version': '11.0.4.1',
+    'version': '11.0.4.2',
     'sequence': 4,
     'summary': 'Easy to import all odoo data i.e Invoice, Sale, Inventory, Purchase,Payment, Picking, Product and Customer.',
     'price': 149,

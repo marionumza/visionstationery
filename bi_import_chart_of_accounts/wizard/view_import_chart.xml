@@ -43,7 +43,7 @@
     		id="menu_chart_of_account"
     		action="bi_act_chart_of_account"
     		name="Import Charts Of Accounts"
-    		parent="account.menu_finance_receivables"
+    		parent="account.menu_finance_configuration"
     		sequence="0"/>
 
 	</data>
