@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="smart_stock_request_form" model="ir.ui.view">
+            <field name="name">Smart Stock Request</field>
+            <field name="model">smart.stock.request</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <footer>
+                        <button name="action_confirm" string="Proceed" class="btn btn-primary" type="object"/>
+                        <button name="cancel" string="Cancel" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_smart_stock_request" model="ir.actions.act_window">
+            <field name="name">Smart Stock Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">smart.stock.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

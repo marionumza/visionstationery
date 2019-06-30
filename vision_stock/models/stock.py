@@ -105,7 +105,13 @@ class StockPicking(models.Model):
     def compute_list_similar(self, nb=None):
         """
         from a singleton, return a list of similar picking
-        :return: list of similar pickings [(id, nb_line, nb_similar_line, similarity_rate, urgency)]
+        :param: nb: number of picking that must be selected=True
+        :return: list of similar pickings
+                [{'pick_id': id,
+                  'nb_line': xx,
+                  'nb_similar_line': xx,
+                  'similarity_rate': xxx,
+                  'urgency': xx}]
         """
         self.ensure_one()
         domain = [('state', '=', 'confirmed'), ('picking_type_id', '=', self.picking_type_id.id)]
@@ -119,7 +125,7 @@ class StockPicking(models.Model):
             nb_line = p.move_lines and len(p.move_lines) or 0
             elt = {'pick_id': p.id,
                    'nb_line': nb_line,
-                   'common_lines': ct,
+                   'nb_similar_line': ct,
                    'similarity_rate': nb_line and ct/nb_line * 100 or 0,
                    'urgency': p.urgency}
             res.append(elt)
@@ -149,7 +155,7 @@ class StockPicking(models.Model):
         """
         select the first nb record in the list. If nb is none, get the default qty from the configuration
         :param res: [{'id': xxx, 'nb_line': xxx, 'common_lines': xxx, 'similarity_rate': xxx, 'urgency': xxx}]
-        :param nb:
+        :param nb: number of pickings that needs to be selected=True
         :return: [{'id': xxx, 'nb_line': xxx, 'common_lines': xxx, 'similarity_rate': xxx, 'urgency': xxx, 'selected': Boolean}]
         """
         if not res:
@@ -159,7 +165,7 @@ class StockPicking(models.Model):
             nb = int(get_param('default_nb_similar_line') or '0')
 
         for r in res:
-            r['selected']: False
+            r['selected'] = False
 
         for n in range(min([nb, len(res)])):
             res[n]['selected'] = True

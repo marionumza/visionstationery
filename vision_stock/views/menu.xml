@@ -1,0 +1,8 @@
+<odoo>
+
+    <menuitem id="menu_smart_stock_request"
+              name="Smart Stock Request"
+              parent="stock_request.menu_stock_request_root"
+              action="action_smart_stock_request"
+              sequence="60"/>
+</odoo>

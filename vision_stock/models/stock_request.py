@@ -145,5 +145,6 @@ class StockRequestOrder(models.Model):
 
     @api.multi
     def unlink(self):
-        self.stock_request_ids.unlink()
+        request_ids = self.mapped('stock_request_ids')
+        request_ids.unlink()
         return super().unlink()

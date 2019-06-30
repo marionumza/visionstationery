@@ -84,9 +84,9 @@ class SimilarPickWizard(models.TransientModel):
     def action_request(self):
         selected_ids = self.line_ids.filtered(lambda r: r.selected)
         if not selected_ids:
-            print('zob')
             return
         pick_ids = selected_ids.mapped('pick_id')
+        pick_ids = pick_ids | self.picking_id
         request_order = pick_ids.create_request_order()
         action = {'name': 'Stock Request Order',
                   'type': "ir.actions.act_window",
