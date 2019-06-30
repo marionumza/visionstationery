@@ -31,6 +31,13 @@ class SaleOrder(models.Model):
                                states={'new': [('readonly', False)], 'draft': [('readonly', False)]})
     unreserved = fields.Boolean('Unreserved', default=True)
 
+    order_customer_category = fields.Char('Customer Category for Order')
+    department = fields.Char('Department')
+    cost_center = fields.Char('Cost Center')
+    portal_requester = fields.Char('Portal Requester')
+    portal_requester_info = fields.Char('Portal Requester info')
+    team_name = fields.Char(related='team_id.name', string='Channel name', readonly=True)
+
     state = fields.Selection([
         ('new', 'New'),
         ('draft', 'Quotation'),

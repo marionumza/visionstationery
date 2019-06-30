@@ -1,6 +1,6 @@
 <odoo>
-    <record id="update_urgency_on_picking_from_so" model="base.automation">
-        <field name="name">Update Urgency on DO from SO</field>
+    <record id="update_info_on_picking_from_so" model="base.automation">
+        <field name="name">Update Info on DO from SO</field>
         <field name="model_id" eval="ref('stock.model_stock_picking')"/>
         <field name="type">ir.actions.server</field>
         <field name="state">code</field>
@@ -8,8 +8,32 @@
         <field name="code">
 for rec in records:
     sale_id = rec.group_id and rec.group_id.sale_id or False
-    urgency = sale_id and sale_id.urgency or 'normal'
-    rec.write({'urgency': urgency})
+    if sale_id:
+        urgency = sale_id.urgency or 'normal'
+        rec.write({'urgency': sale_id.urgency or 'normal',
+                   'portal_requester': sale_id.portal_requester,
+                   'portal_requester_info': sale_id.portal_requester_info})
+        </field>
+        <field name="filter_pre_domain">[('state','in',['draft'])]</field>
+    </record>
+
+    <record id="update_info_on_invoice_from_so" model="base.automation">
+        <field name="name">Update Info on invoice from SO</field>
+        <field name="model_id" eval="ref('account.model_account_invoice')"/>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="trigger">on_create_or_write</field>
+        <field name="code">
+for rec in records:
+    if not rec.invoice_line_ids:
+        continue
+    sale_line_ids = rec.invoice_line_ids.mapped('sale_line_ids')
+    sale_id = len(sale_line_ids)>0 and sale_line_ids.mapped('order_id')[0] or False
+
+    if not sale_id:
+        continue
+    rec.write({'portal_requester': sale_id.portal_requester,
+               'portal_requester_info': sale_id.portal_requester_info})
         </field>
         <field name="filter_pre_domain">[('state','in',['draft'])]</field>
     </record>

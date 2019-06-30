@@ -1,0 +1,43 @@
+<odoo>
+    <record id="vs_invoice_form" model="ir.ui.view">
+        <field name="name">vs.account.invoice.form</field>
+        <field name="model">account.invoice</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <data>
+
+                <xpath expr="//notebook/page[@name='other_info']" position="after">
+                    <page name="requester_info" string="Requester Info">
+                        <group>
+                            <group>
+                                <field name="portal_requester"/>
+                                <field name="portal_requester_info"/>
+                            </group>
+                        </group>
+                    </page>
+
+                    <page name="grouped_line" string="Grouped Lines">
+                        <div>
+                            <button name="action_group_line" type="object" string="Group by Cost Center" class="btn btn-primary" style="margin-right:5px; margin-top:5px;"/>
+                            <button name="action_group_line_reset" type="object" string="Clear" style="margin-right:5px; margin-top:5px;"/>
+                        </div>
+                        <field name="grouped_line_ids">
+                            <tree create="false">
+                                <field name="name"/>
+                                <field name="summary_by"/>
+                                <field name="quantity"/>
+                                <field name="price_unit"/>
+                                <field name="price_total"/>
+                            </tree>
+                        </field>
+                        <group class="oe_subtotal_footer oe_right">
+                            <field name="total_grouped_line"/>
+                        </group>
+                    </page>
+                </xpath>
+
+            </data>
+        </field>
+    </record>
+</odoo>

@@ -37,7 +37,7 @@
             <data>
                 <header position="inside">
                     <button name="action_quotation" type="object" string="Quotation" attrs="{'invisible': [('state', '!=', 'new')]}"/>
-                    <button name='action_approve' type="object" string='Approve' attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('team_id', 'in', [3,4])]}" class="btn btn-primary"/>
+                    <button name='action_approve' type="object" string='Approve' attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('team_name', 'in', ['Web','Blanket'])]}" class="btn btn-primary"/>
                     <button name='action_new_related_order' type="object" string='New order' attrs="{'invisible': [('blanket', '=', False)]}" class="btn_primary"/>
                 </header>
 
@@ -97,6 +97,28 @@
 
                 <xpath expr="//field[@name='order_line']/tree/field[1]" position="after">
                     <field name="line_ok"/>
+                </xpath>
+
+                <xpath expr="//notebook/page[1]" position="after">
+                    <page name="requester_info" string="Requester Info">
+
+                        <group invisible="1">
+                            <field name="team_name"/>
+                        </group>
+
+                        <group>
+                            <group>
+                                <field name="order_customer_category"/>
+                                <field name="cost_center"/>
+                                <field name="department"/>
+                            </group>
+                            <group>
+                                <field name="portal_requester"/>
+                                <field name="portal_requester_info"/>
+                            </group>
+                        </group>
+
+                    </page>
                 </xpath>
 
             </data>

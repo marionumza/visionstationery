@@ -14,7 +14,7 @@
     'name': "Vision Sales",
     'summary': """Customised Sales for Vision Stationery""",
     'category': 'Sale',
-    'version': '11.0.1',
+    'version': '11.0.1.1',
     'author': "Alitec Pte Ltd",
     'depends': [
         'sale', 'stock', 'sale_stock', 'base_automation'
@@ -24,7 +24,9 @@
              'views/sale.xml',
              'views/blanket_sale.xml',
              'views/stock.xml',
+             'views/invoice.xml',
              'views/menu.xml',
-             'data/automation.xml'
+             'data/automation.xml',
+             'security/ir.model.access.csv'
     ],
 }

@@ -10,3 +10,6 @@ class StockPicking(models.Model):
     urgency = fields.Selection([('normal', 'Normal'),
                                 ('urgent', 'Urgent'),
                                 ('very_urgent', 'Very Urgent')], string='Urgency', default='normal')
+
+    portal_requester = fields.Char('Portal Requester')
+    portal_requester_info = fields.Char('Portal Requester info')

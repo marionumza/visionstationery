@@ -9,6 +9,18 @@
                 <field name="origin" position="after">
                     <field name="urgency"/>
                 </field>
+
+                <xpath expr="//notebook/page[@name='extra']" position="after">
+                    <page name="requester_info" string="Requester Info">
+                        <group>
+                            <group>
+                                <field name="portal_requester"/>
+                                <field name="portal_requester_info"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
             </data>
         </field>
     </record>

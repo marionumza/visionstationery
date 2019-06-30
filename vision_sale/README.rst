@@ -5,7 +5,7 @@ Vision Sale
 
 Customisation for the sales process of Vision Stationery
 Alitec Pte Ltd
-Last update: 29 Apr 2019
+Last update: 30 June 2019
 
 Configuration
 =============
@@ -34,3 +34,20 @@ Min and Max Sell Price
 
 * Products can have a min and max sell price
 * If quoted price is outside the range, the quotation cannot be saved
+
+
+Reservation
+-----------
+Administrator can "reserve" the products on a sale order. Reserved Qty are displayed in the catalog tree view, as a
+separate column
+
+
+Requester information
+---------------------
+Requester information as well as cost center, and department can be added on a sale order. Requestor information are
+passed to the DO, and invoice
+
+
+Invoice line grouping
+---------------------
+Invoice lines can be regrouped into grouped invoice lines, for PDF only.

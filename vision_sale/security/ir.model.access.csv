@@ -1,0 +1,2 @@
+id,name,model_id/id,group_id/id,perm_create,perm_read,perm_write,perm_unlink
+access_invoice_group_line_billing,invoice.group.line.billing,vision_sale.model_account_invoice_grouped_line,account.group_account_invoice,True,True,True,True
