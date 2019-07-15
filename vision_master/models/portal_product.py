@@ -12,6 +12,7 @@ class PortalProductMap(models.Model):
     name = fields.Char('Portal Code')
     description = fields.Char('Product description in portal')
     product_id = fields.Many2one('product.product', 'Product')
+    default_code = fields.Char(related="product_id.default_code",string="Internal Reference", store=True)
 
     @api.multi
     def name_get(self):
