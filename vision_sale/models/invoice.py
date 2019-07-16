@@ -11,7 +11,8 @@ class AccountInvoice(models.Model):
     portal_requester_info = fields.Char('Portal Requester info')
     grouped_line_ids = fields.One2many('account.invoice.grouped.line', 'invoice_id', 'Grouped lines')
     total_grouped_line = fields.Float('Total Grouped Line')
-
+    order_customer_category = fields.Char('Customer Category for Order')
+    
     @api.multi
     def action_group_line(self):
         self.ensure_one()

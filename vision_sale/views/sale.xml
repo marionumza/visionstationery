@@ -115,6 +115,7 @@
                             <group>
                                 <field name="portal_requester"/>
                                 <field name="portal_requester_info"/>
+                                <field name="portal_requester_id"/>
                             </group>
                         </group>
 

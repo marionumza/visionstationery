@@ -23,6 +23,18 @@ class ProductTemplate(models.Model):
             qty = len(variant_lst) > 0 and sum(variant_lst) or 0.0
             template.reserved_qty = qty
 
+    @api.constrains("default_code")
+    def _constraint_uniq_default_code(self):
+        for record in self:
+            other_product_ids =[]
+            if record.default_code:
+                other_product_ids = self.search([('default_code','=',record.default_code),('id','!=',record.id)])
+            if other_product_ids:
+                raise ValidationError(_(
+                    "Internal Reference must be Unique !"
+                ))
+
+
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -46,3 +58,4 @@ class ProductProduct(models.Model):
             product.reserved_qty = product.id in data and data[product.id] or 0.0
         return
 
+ 
