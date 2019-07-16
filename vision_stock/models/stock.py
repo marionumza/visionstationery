@@ -67,7 +67,8 @@ class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
     supply_request_ids = fields.Many2many('stock.request.order', 'origin_picking_request', 'picking_id', 'request_id', string='Supply Request')
-    supply_request_count = fields.Integer('Supply request count', compute='_compute_supply_request_count')
+    supply_request_count = fields.Integer('Supply request count', compute='_compute_supply_request_data')
+    supply_pick_ids = fields.Many2many('stock.picking', string='Supply Picking', compute='_compute_supply_request_data')
 
     @api.multi
     def create_request_order(self):
@@ -77,10 +78,28 @@ class StockPicking(models.Model):
         return request_order
 
     @api.multi
-    def _compute_supply_request_count(self):
+    def _compute_supply_request_data(self):
         for rec in self:
             valid_request_ids = rec.supply_request_ids.filtered(lambda r: r.state != 'cancel')
             rec.supply_request_count = len(valid_request_ids)
+
+            # get the list of product in the picking
+            searched_product_ids = rec.move_lines.mapped('product_id')
+
+            # get the list of supply pickings related to all the stock requests linked to this picking
+            supply_request_ids = rec.supply_request_ids
+            supply_picking_ids = supply_request_ids.mapped('picking_ids')
+
+            # Filter - keep only the supply pickings that contains at least one product in the picking.
+            # Several stock pickings are linked to a single stock request order
+            # one stock request order is linked to several supply pickings
+
+            supply_move_ids = supply_picking_ids.mapped('move_lines')
+            selected_move_ids = supply_move_ids.filtered(lambda r: r.product_id in searched_product_ids and r.state != 'cancel')
+            supply_picking_ids = selected_move_ids.mapped('picking_id')
+
+            vals = len(supply_picking_ids) > 0 and [(6, 0, [i.id for i in supply_picking_ids])] or False
+            rec.supply_pick_ids = vals
 
     @api.multi
     def show_supply_request(self):

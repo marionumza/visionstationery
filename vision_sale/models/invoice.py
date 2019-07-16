@@ -54,6 +54,15 @@ class AccountInvoice(models.Model):
 class AccountInvoiceLine(models.Model):
     _inherit = 'account.invoice.line'
 
+    sale_order_id = fields.Many2one('sale.order', string='Sale Order', compute='_get_sale_order')
+
+    @api.multi
+    def _get_sale_order(self):
+        for rec in self:
+            order_ids = rec.sale_line_ids.mapped('order_id')
+            order_id = len(order_ids) > 0 and order_ids[0] or False
+            rec.sale_order_id = order_id
+
     def get_cost_center(self):
         self.ensure_one()
         order_ids = self.sale_line_ids and self.sale_line_ids.mapped('order_id') or False

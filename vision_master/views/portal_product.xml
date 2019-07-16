@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <tree editable="bottom">
                 <field name="name"/>
+                <field name="contract_name"/>
+                <field name="item_portal_reference"/>
                 <field name="description"/>
                 <field name="product_id"/>
                 <field name="default_code"/>

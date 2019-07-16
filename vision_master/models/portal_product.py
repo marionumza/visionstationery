@@ -10,7 +10,9 @@ class PortalProductMap(models.Model):
     _description = 'Mapping product name per portal'
 
     name = fields.Char('Portal Code')
-    description = fields.Char('Product description in portal')
+    contract_name = fields.Char('Contract')
+    item_portal_reference = fields.Char('Item Portal Reference')
+    description = fields.Char('Product Description in Portal')
     product_id = fields.Many2one('product.product', 'Product')
     default_code = fields.Char(related="product_id.default_code",string="Internal Reference", store=True)
 
