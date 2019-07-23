@@ -1,4 +1,26 @@
 <odoo>
+
+
+     <record id="invoice_cost_report" model="ir.ui.view">
+            <field name="name">Invoice Cost Report</field>
+            <field name="model">invoice.cost.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="datas_fname" invisible="1"/>
+                            <field name="datas" filename="datas_fname" readonly="1" string="Download"/>
+                        </group>
+                    </group>
+                    <footer>
+		                <button string="Close" class="oe_link" special="cancel"/>
+		            </footer>
+                </form>
+            </field>
+        </record>
+
+
     <record id="vs_invoice_form" model="ir.ui.view">
         <field name="name">vs.account.invoice.form</field>
         <field name="model">account.invoice</field>
@@ -17,6 +39,7 @@
                             <group>
                                 <field name="portal_requester"/>
                                 <field name="portal_requester_info"/>
+                                <field name="portal_requester_id"/>
                             </group>
                             <group>
                                 <field name="order_customer_category"/>
@@ -28,6 +51,9 @@
                         <div>
                             <button name="action_group_line" type="object" string="Group by Cost Center" class="btn btn-primary" style="margin-right:5px; margin-top:5px;"/>
                             <button name="action_group_line_reset" type="object" string="Clear" style="margin-right:5px; margin-top:5px;"/>
+                            <button name="action_report_1" type="object" string="Report 1" class="btn btn-primary" style="margin-right:5px; margin-top:5px;"/>
+                            <button name="action_report_2" type="object" string="Report 2" class="btn btn-primary" style="margin-right:5px; margin-top:5px;"/>
+                            <button name="action_report_3" type="object" string="Report 3" class="btn btn-primary" style="margin-right:5px; margin-top:5px;"/>
                         </div>
                         <field name="grouped_line_ids">
                             <tree create="false">

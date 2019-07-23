@@ -196,6 +196,7 @@ class SaleOrder(models.Model):
     def _prepare_invoice(self):
         res = super(SaleOrder, self)._prepare_invoice()
         res['order_customer_category'] = self.order_customer_category
+        res['portal_requester_id'] = self.portal_requester_id
         return res
     
     @api.multi
@@ -288,7 +289,8 @@ class SaleOrderLine(models.Model):
     line_ok = fields.Boolean('Checked', compute='_check_line', store=True)
     proposed_price_unit = fields.Float('Proposed Price', help='Proposed price')
     final_price = fields.Float('RSP', compute='_check_line', help='Recommended Sell Price')
-
+    customer_product_reference = fields.Char('Cust. Prod. Ref')
+    
     # The only purpose of the "final_price" is to allow the user to see the price_unit, without the possibility
     # to modify it directly.
     # - If price_unit is a readonly field, it is not possible to modify it, even from backend
