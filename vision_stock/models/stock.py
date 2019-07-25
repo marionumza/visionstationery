@@ -70,6 +70,42 @@ class StockPicking(models.Model):
     supply_request_count = fields.Integer('Supply request count', compute='_compute_supply_request_data')
     supply_pick_ids = fields.Many2many('stock.picking', string='Supply Picking', compute='_compute_supply_request_data')
 
+
+    @api.multi
+    def put_in_pack_custom(self):
+        packing_wiz_obj = self.env['stock.packing.wizard']
+        packing_wiz_ln_obj = self.env['stock.packing.line.wizard']
+        wiz_id = packing_wiz_obj.create({})
+        for picking in self:
+            for move in picking.move_lines:
+                vals = {
+                    'packing_wizard_id':wiz_id.id,
+                    'move_id': move.id,
+                    'product_id': move.product_id.id,
+                    'reserved_qty':move.reserved_availability,
+                    'done_qty':move.quantity_done,
+                    'packing_qty':0.00,
+                    }
+                packing_wiz_ln_obj.create(vals)
+        
+        return {
+                'name': _('Packing'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'stock.packing.wizard',
+                'type': 'ir.actions.act_window',
+                'res_id': wiz_id.id,
+                'target': 'new'
+            }
+        
+        
+    @api.multi
+    def remove_in_pack(self):
+        self.do_unreserve()
+        self.action_assign()
+        return True
+
+
     @api.multi
     def create_request_order(self):
         move_ids = self.mapped('move_lines')

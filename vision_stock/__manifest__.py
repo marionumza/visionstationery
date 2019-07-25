@@ -26,6 +26,7 @@
              'views/stock_rule.xml',
              'wizard/similar_pick_wizard.xml',
              'wizard/smart_stock_request.xml',
+             'wizard/stock_packing_wizard_view.xml',
              'views/menu.xml'
     ],
 }

@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="view_stock_packing_wizard" model="ir.ui.view">
+            <field name="name">Stock Packing wizard</field>
+            <field name="model">stock.packing.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Stock Packing wizard">
+                    <sheet>
+                        <group>
+                            <field name="line_ids" nolabel="1">
+								<tree string="Packing List" create="false" editable="bottom">
+									<field name="packing_wizard_id" invisible="1"/>
+									<field name="move_id" invisible="1"/>
+									<field name="product_id" readonly="1" />
+									<field name="reserved_qty" readonly="1" invisible="1"/>
+									<field name="done_qty" readonly="1" invisible="1"/>
+									<field name="remain_pack" readonly="1"/>
+									<field name="packing_qty"/>
+								</tree>
+                            </field>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Create Packing" name="create_packing" class="oe_highlight" type="object"/>
+                        or 
+                        <button string="Cancel" class="btn_default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
