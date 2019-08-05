@@ -69,7 +69,15 @@ class StockPicking(models.Model):
     supply_request_ids = fields.Many2many('stock.request.order', 'origin_picking_request', 'picking_id', 'request_id', string='Supply Request')
     supply_request_count = fields.Integer('Supply request count', compute='_compute_supply_request_data')
     supply_pick_ids = fields.Many2many('stock.picking', string='Supply Picking', compute='_compute_supply_request_data')
+    package_count = fields.Integer(string='Packages', compute='_compute_package_ids')
 
+
+    @api.depends('move_line_ids.result_package_id')
+    def _compute_package_ids(self):
+        self.ensure_one()
+        package_ids = self.move_line_ids.mapped('result_package_id.id')
+        self.package_count = len(list(set(package_ids)))
+        
 
     @api.multi
     def put_in_pack_custom(self):

@@ -2,6 +2,12 @@ from odoo import models, fields, api, SUPERUSER_ID,_
 from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 from odoo.exceptions import UserError
 
+class StockPackageWizard(models.TransientModel):
+    
+    _name = 'stock.package.wizard'
+
+    package_id = fields.Many2one('stock.quant.package','Package', readonly=True)
+    
 
 class StockPackingWizard(models.TransientModel):
     
@@ -44,6 +50,16 @@ class StockPackingWizard(models.TransientModel):
                     new_operation_move.write({'product_uom_qty': done_to_keep, 'qty_done': operation.packing_qty})
                     operation_ids |= new_operation_move
                 operation_ids.write({'result_package_id': package.id})
+            package_wiz_id = self.env['stock.package.wizard'].create({'package_id':package.id})
+            return {
+                'name': _('Package'),
+                'view_type': 'form',
+                'view_mode': 'form',
+                'res_model': 'stock.package.wizard',
+                'type': 'ir.actions.act_window',
+                'res_id': package_wiz_id.id,
+                'target': 'new'
+            }
         return True
     
     

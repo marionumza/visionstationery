@@ -1,5 +1,24 @@
 <odoo>
     <data>
+    
+        <record id="view_stock_package_show_wizard" model="ir.ui.view">
+            <field name="name">Stock Package wizard</field>
+            <field name="model">stock.package.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Package">
+                	<sheet>
+                        <group>
+                        	<field name="package_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Done" class="btn_default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    
         <record id="view_stock_packing_wizard" model="ir.ui.view">
             <field name="name">Stock Packing wizard</field>
             <field name="model">stock.packing.wizard</field>

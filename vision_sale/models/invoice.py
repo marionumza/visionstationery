@@ -197,6 +197,7 @@ class AccountInvoice(models.Model):
         workbook = xlsxwriter.Workbook(created_file_path)
         worksheet = workbook.add_worksheet()
         header = workbook.add_format({'bold': 1, 'align': 'left'})
+        header_r = workbook.add_format({'bold': 1, 'align': 'right'})
         align = workbook.add_format({'align': 'left'})
         merge_format = workbook.add_format({
                                             'bold': 1,
@@ -214,7 +215,7 @@ class AccountInvoice(models.Model):
         worksheet.merge_range(4,1,4,3, "Category Of Order : %s"%(str(self.order_customer_category or '')), merge_format)
 
         row = first_row = 7
-        worksheet.set_column(0, 7, 14)
+        worksheet.set_column(0, 9, 14)
         worksheet.set_row(row, 40)
         
         worksheet.write(row, 0, "Cost Center", header)
@@ -224,7 +225,9 @@ class AccountInvoice(models.Model):
         worksheet.write(row ,4, "Product \nDescription", header)
         worksheet.write(row ,5, "Uom", header)
         worksheet.write(row ,6, "Customer \nProduct\nReferance", header)
-        worksheet.write(row ,7, "Unit Price", header)
+        worksheet.write(row ,7, "Unit Price", header_r)
+        worksheet.write(row ,8, "Qty", header_r)
+        worksheet.write(row ,9, "Amount \nWithout Tax", header_r)
 
         to_do = self._cost_center_line()
         main_list =[]
@@ -233,9 +236,15 @@ class AccountInvoice(models.Model):
         for cost_center, line_list in to_do.items():
             for inv_ln  in inv_ln_obj.browse(line_list):
                 if inv_ln.sale_order_id and (inv_ln.sale_order_id.id not in so_dict):
-                    so_dict[inv_ln.sale_order_id.id]= [(cost_center, inv_ln.sale_order_id.portal_requester_id, inv_ln.sale_order_id.name, inv_ln.product_id.default_code, inv_ln.product_id.name, inv_ln.uom_id.name,inv_ln.sale_line_ids.mapped('customer_product_reference'),inv_ln.price_unit)]
+                    so_dict[inv_ln.sale_order_id.id]= [(cost_center, inv_ln.sale_order_id.portal_requester_id, \
+                                                        inv_ln.sale_order_id.name, inv_ln.product_id.default_code, \
+                                                        inv_ln.product_id.name, inv_ln.uom_id.name,\
+                                                        inv_ln.sale_line_ids.mapped('customer_product_reference'),\
+                                                        inv_ln.price_unit,inv_ln.quantity,inv_ln.price_subtotal)]
                 else:
-                    so_dict[inv_ln.sale_order_id.id].append((' ', ' ', inv_ln.sale_order_id.name, inv_ln.product_id.default_code, inv_ln.product_id.name, inv_ln.uom_id.name,inv_ln.sale_line_ids.mapped('customer_product_reference'),inv_ln.price_unit))
+                    so_dict[inv_ln.sale_order_id.id].append((' ', ' ', inv_ln.sale_order_id.name, inv_ln.product_id.default_code, \
+                                                             inv_ln.product_id.name, inv_ln.uom_id.name,inv_ln.sale_line_ids.mapped('customer_product_reference')\
+                                                             ,inv_ln.price_unit, inv_ln.quantity,inv_ln.price_subtotal))
                 cost_center =''
         for so_id, cost_lst in so_dict.items():
             for cost_line in cost_lst:
@@ -247,9 +256,11 @@ class AccountInvoice(models.Model):
                 worksheet.write(row + 1, 5, cost_line[5], align) # UOM
                 worksheet.write(row + 1, 6, cost_line[6] and cost_line[6][0] or '-', align)#customer_product_referance
                 worksheet.write(row + 1, 7, cost_line[7], num_format) # price unit
+                worksheet.write(row + 1, 8, cost_line[8], num_format) # qty
+                worksheet.write(row + 1, 9, cost_line[9], num_format) # subtotal
                 row += 1
 
-        worksheet.conditional_format(first_row, 0, row, 7,{'type' : 'no_blanks','format':border_formater})
+        worksheet.conditional_format(first_row, 0, row, 9,{'type' : 'no_blanks','format':border_formater})
         workbook.close()
         file = open(created_file_path, 'rb')
         report_data_file = base64.encodebytes(file.read())
