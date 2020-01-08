@@ -1,0 +1,18 @@
+<odoo>
+    <record id="purchase_order_inherit_vision_purchase_form" model="ir.ui.view">
+	    <field name="name">purchase.order.vision_purchase.form</field>
+	    <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+	    <field name="arch" type="xml">
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_unit']" position="before">
+            	<field name="comment"/>
+            </xpath>
+            <xpath expr="//form/sheet/notebook/page/field[@name='order_line']/form//group/field[@name='price_unit']" position="after">
+            	<field name="comment"/>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

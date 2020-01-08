@@ -1,0 +1,30 @@
+<odoo>
+
+
+	<record id="product_supplierinfo_tree_inherit_vision_pur_view" model="ir.ui.view">
+	    <field name="name">product.supplierinfo.tree.view</field>
+	    <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+	    <field name="arch" type="xml">
+            <field name="min_qty" position="before">
+            	<field name="comment"/>
+            </field>
+        </field>
+    </record>
+            
+
+	<record id="product_supplierinfo_form_inherit_vision_pur_view" model="ir.ui.view">
+	    <field name="name">product.supplierinfo.form.inherit.vision_pur.view</field>
+	    <field name="model">product.supplierinfo</field>
+        <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+	    <field name="arch" type="xml">
+            <xpath expr="//form/group/group" position="inside">
+            	<field name="comment"/>
+            </xpath>
+        </field>
+    </record>
+
+	<menuitem id="menu_vendor_pricelist" name="Vendor Pricelist"
+            parent="purchase.menu_purchase_root" action="product.product_supplierinfo_type_action" sequence="110" />
+
+</odoo>
